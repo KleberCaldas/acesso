@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "120731019287",
+    "project_id": "acesso-958e2",
+    "storage_bucket": "acesso-958e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120731019287:android:3d0cd35ebe1c0de08d9452",
+        "android_client_info": {
+          "package_name": "com.acesso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120731019287-ntmhi0oruvotiu9gg211qogvgg8d7n6g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1VPIbGg_t0qwzJ7O-7Ei7Rku6wP1yfPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120731019287-ntmhi0oruvotiu9gg211qogvgg8d7n6g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
