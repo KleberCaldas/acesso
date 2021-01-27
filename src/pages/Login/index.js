@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, Alert} from 'react-native';
-import {Container, Title, Input, Button, ButtonText, SignUpButton, SignUpText} from './styles' 
+import {Container, Title, Input, Button, ButtonText, SignUpButton, SignUpText} from './styles'; 
+import { AuthContext } from '../../contexts/auth'
 
 export default function Login(){
 
@@ -8,6 +9,8 @@ export default function Login(){
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const {signUp} = useContext(AuthContext)
 
     // Functions 
 
@@ -34,7 +37,8 @@ export default function Login(){
             return;
         }
         
-        alert('CADASTROU')
+        //add user
+        signUp(email, password, name);
     }
 
     if(login){
