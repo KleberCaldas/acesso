@@ -1,3 +1,5 @@
+//Rules about login, register users
+
 import React, {useState, createContext, useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -83,12 +85,21 @@ function AuthProvider({children}){
         })
     }
 
+    async function signOut(){
+        await auth().signOut(); //method firebase
+        await AsyncStorage.clear()
+        .then(() => {
+            setUser(null);
+        })
+    }
+
+
     async function storageUser(data){
         await AsyncStorage.setItem('acesso', JSON.stringify(data));
     }
 
     return(
-        <AuthContext.Provider value = {{ signed: !!user, user, signUp, signIn, loadingAuth, loading}}>
+        <AuthContext.Provider value = {{ signed: !!user, user, signUp, signIn, signOut,loadingAuth, loading}}>
             {children}
         </AuthContext.Provider>
     );
