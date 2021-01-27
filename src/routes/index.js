@@ -8,21 +8,22 @@ import CollaboratorRoutes from '../routes/collaborator.routes';
 import { AuthContext } from '../contexts/auth';
 
 function Routes(){
-    const {signed} = useContext(AuthContext);
-    const loading = false;
+    const {signed, loading} = useContext(AuthContext);
 
     if(loading){
-        <View
-            style = {{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'darkkhaki'
-            }}
-        >
-            <ActivityIndicator size = {50} color = "#e52246"/>
+        return(
+            <View
+                style = {{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'darkkhaki'
+                }}
+            >
+                <ActivityIndicator size = {50} color = "#e52246"/>
 
-        </View>
+            </View>
+        );
     }
 
     return (
