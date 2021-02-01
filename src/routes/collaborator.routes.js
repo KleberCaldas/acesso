@@ -54,10 +54,15 @@ function CollaboratorRoutes(){
             tabBarOptions = {{
                 keyboardHidesTabBar: true,
                 showLabel: true, //show name
+                labelStyle:{
+                    fontSize: 15,
+                },
+                
 
                 sytle:{
                     backgroundColor: '#FFF',
-                    borderTopWidth: 20,
+                    borderTopWidth: 30,
+                    
                 },
 
                 activeTintColor: '#bdb76b'

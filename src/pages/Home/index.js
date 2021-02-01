@@ -15,17 +15,27 @@ export default function Home(){
                     <ButtonText>Restaurantes</ButtonText>
                 </ButtonMenu>
 
-                <ButtonMenu>
-                    <ButtonText>Lazer</ButtonText>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Compras', bdId: 'shopping'})}>
+                    <ButtonText>Compras</ButtonText>
                 </ButtonMenu>
             </ViewBtn>
 
             <ViewBtn>
-                <ButtonMenu>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Lazer', bdId: 'recreation'})}>
+                    <ButtonText>Lazer</ButtonText>
+                </ButtonMenu>
+
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Educação', bdId: 'education'})}>
+                    <ButtonText>Educação</ButtonText>
+                </ButtonMenu>
+            </ViewBtn>
+
+            <ViewBtn>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Serviço Público', bdId: 'publicservice'})}>
                     <ButtonText>Serviço Público</ButtonText>
                 </ButtonMenu>
 
-                <ButtonMenu>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Saúde', bdId: 'health'})}>
                     <ButtonText>Saúde</ButtonText>
                 </ButtonMenu>
             </ViewBtn>
