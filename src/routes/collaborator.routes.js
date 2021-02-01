@@ -17,10 +17,33 @@ const Stack = createStackNavigator();
 function StackScreen(){ //manager pages in stack
     return(
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
-            <Stack.Screen name="PlaceList" component={PlaceList}/>
-            <Stack.Screen name="AboutPlace" component={AboutPlace}/>
-            <Stack.Screen name="EvaluatePlace" component={EvaluatePlace}/>
+            <Stack.Screen 
+                name="Home" 
+                component={Home} 
+                options={{headerShown:false}}
+            />
+            
+            <Stack.Screen 
+                name="PlaceList" 
+                component={PlaceList}
+                options ={{
+                    headerTintColor: '#FFF',
+                   // headerTitle: 'Lista de locais próximos',
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                }}
+            />
+            
+            <Stack.Screen 
+                name="AboutPlace" 
+                component={AboutPlace}
+            />
+            
+            <Stack.Screen 
+                name="EvaluatePlace" 
+                component={EvaluatePlace}
+            />
         </Stack.Navigator>
     );
 }
@@ -41,7 +64,8 @@ function CollaboratorRoutes(){
             }}
         >
             <Tab.Screen 
-                name = "Home" 
+                //name = "Home"
+                name = "Início" 
                 component={StackScreen}
                 options ={{
                     tabBarIcon :({ color, size}) => {
@@ -51,7 +75,8 @@ function CollaboratorRoutes(){
             />
             
             <Tab.Screen 
-                name = "Search" 
+                //name = "Search"
+                name = "Pesquisar" 
                 component={Search}
                 options ={{
                     tabBarIcon :({ color, size}) => {
@@ -61,7 +86,8 @@ function CollaboratorRoutes(){
             />
             
             <Tab.Screen 
-                name = "Profile" 
+                //name = "Profile"
+                name = "Perfil" 
                 component={Profile}
                 options ={{
                     tabBarIcon :({ color, size}) => {

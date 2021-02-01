@@ -1,22 +1,26 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {Container, ButtonMenu, ButtonText} from './styles';
+import {Container, ButtonMenu, ButtonText, ViewBtn} from './styles';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Home(){
+
+    const navigation = useNavigation();
+    
     return(
     
         <Container>
-            <View>
-                <ButtonMenu>
+            <ViewBtn>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Restaurantes', bdId: 'restaurants'})}>
                     <ButtonText>Restaurantes</ButtonText>
                 </ButtonMenu>
 
                 <ButtonMenu>
                     <ButtonText>Lazer</ButtonText>
                 </ButtonMenu>
-            </View>
+            </ViewBtn>
 
-            <View>
+            <ViewBtn>
                 <ButtonMenu>
                     <ButtonText>Serviço Público</ButtonText>
                 </ButtonMenu>
@@ -24,7 +28,7 @@ export default function Home(){
                 <ButtonMenu>
                     <ButtonText>Saúde</ButtonText>
                 </ButtonMenu>
-            </View>
+            </ViewBtn>
 
             </Container>
     );
