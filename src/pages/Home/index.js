@@ -11,31 +11,31 @@ export default function Home(){
     
         <Container>
             <ViewBtn>
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Restaurantes', bdId: 'restaurants'})}>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Restaurantes'})}>
                     <ButtonText>Restaurantes</ButtonText>
                 </ButtonMenu>
 
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Compras', bdId: 'shopping'})}>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Compras'})}>
                     <ButtonText>Compras</ButtonText>
                 </ButtonMenu>
             </ViewBtn>
 
             <ViewBtn>
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Lazer', bdId: 'recreation'})}>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Lazer'})}>
                     <ButtonText>Lazer</ButtonText>
                 </ButtonMenu>
 
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Educação', bdId: 'education'})}>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Educação'})}>
                     <ButtonText>Educação</ButtonText>
                 </ButtonMenu>
             </ViewBtn>
 
             <ViewBtn>
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Serviço Público', bdId: 'publicservice'})}>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Serviço Público'})}>
                     <ButtonText>Serviço Público</ButtonText>
                 </ButtonMenu>
 
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Saúde', bdId: 'health'})}>
+                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Saúde'})}>
                     <ButtonText>Saúde</ButtonText>
                 </ButtonMenu>
             </ViewBtn>
