@@ -50,6 +50,7 @@ export default function PlaceList({route}){
     const subscriber = firestore()
     .collection("RJ")
     .where("category", "==", categories)
+    .orderBy('name')
     .onSnapshot( snapshot =>{
         const listPlace = [];
 
