@@ -4,7 +4,7 @@ export const Container = styled.View`
     margin-top: 15px;
     margin: 15px 3%;
     background-color: #FFF;
-    padding: 35px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 1px 1px 3px rgba(18, 18, 18, 0.2);
     elevation: 3;
@@ -16,15 +16,16 @@ export const Header = styled.View`
     margin-bottom: 5px;
 `;
 export const Avatar = styled.Image`
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
     margin-right: 10px;
 `;
 export const CompanyName = styled.Text`
     color: #353840;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
+   
 `;
 
 export const ContentView = styled.View`
@@ -69,4 +70,7 @@ export const TextButtom = styled.Text`
     color: #FFF;
     font-weight: bold;
     font-size: 15px;
+`;
+
+export const Grade = styled.Text`
 `;

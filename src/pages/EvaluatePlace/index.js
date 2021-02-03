@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 
-export default function EvaluatePlace(){
+export default function EvaluatePlace({route}){
+    
+    const [docId] = useState(route.params.docId);
+    
     return(
         <View>
-            <Text>Pagina de EvaluatePlace</Text>
+            <Text>{docId}</Text>
         </View>
     );
 }
