@@ -47,9 +47,8 @@ export default function PlaceList({route}){
 
 
     const subscriber = firestore()
-    .collection('RJ')
-    .where('category', '==', categories)
-    .orderBy('name', 'desc')
+    .collection("RJ")
+    .where("category", "==", categories)
     .onSnapshot( snapshot =>{
         const listPlace = [];
 
@@ -61,6 +60,7 @@ export default function PlaceList({route}){
         });
 
         setPlaces(listPlace);
+        console.log(listPlace);
         setLoading(false);
 
     })
