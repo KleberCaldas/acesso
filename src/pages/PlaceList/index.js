@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Container, ListPlace } from './styles';
 import firestore from '@react-native-firebase/firestore';
 import { AuthContext } from '../../contexts/auth';
+import PlacesList from '../../components/PlacesList';
 
 export default function PlaceList({route}){
 
@@ -81,8 +82,9 @@ export default function PlaceList({route}){
             ) : //else
             (      
                 <ListPlace
+                    showVerticalScrollIndicator = {false}
                     data={places} 
-                    renderItem = {({item}) => (<Text>Teste</Text>)}
+                    renderItem = {({item}) => <PlacesList data = {item}/>}
                 />
             )
         }
