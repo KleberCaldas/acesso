@@ -3,13 +3,13 @@ import {View, Text} from 'react-native';
 import {Container, AreaInput, Input, List} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
 import firestore from '@react-native-firebase/firestore';
-
+import SearchList from '../../components/SearchList';
 
 export default function Search(){
     
     const [input, setInput] = useState('');
     const [places, setPlaces] = useState([]);
-    
+
     useEffect(() => {
         if(input === '' || input === undefined){
             setPlaces([]);
@@ -17,8 +17,8 @@ export default function Search(){
         }
 
         const subscriber = firestore().collection('RJ')
-        .where('name', '>=', input)
-        .where('name', '<=', input + "\uf8ff") //unicode
+        .where("name", ">=", input)
+        .where("name", "<=", input + "\uf8ff") //unicode
         .onSnapshot( snapshot => {
             const listPlaces = [];
 
@@ -35,7 +35,7 @@ export default function Search(){
         
         return () => subscriber();
 
-    },[input]);
+    },[input]);    
     
     return(
         <Container>
@@ -50,12 +50,18 @@ export default function Search(){
                 <Input
                     placeholder="Digite onde deseja ir"
                     placeholderTextColor="#a9a9a9"
-                    value={input}
-                    onchangeText = {(text) => setInput(text)}
+                    onChangeText = {(text) => setInput(text)}
+                    value = { input }
                 />
 
             </AreaInput>
-        
+
+            <List
+                showsVerticalScrollIndicator = {false}
+                data = {places}
+                keyExtrator = { (item) => item.id}
+                renderItem = { ({item}) => <SearchList data = {item}/>}
+            />
         </Container>
     );
 }
