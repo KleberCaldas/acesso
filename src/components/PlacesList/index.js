@@ -35,7 +35,7 @@ export default function PlacesList({data}){
                     )
                 }
                 
-                <CompanyName>{data?.name}</CompanyName>
+                <CompanyName numberOfLines={1}>{data?.name}</CompanyName>
             </Header>
 
             <ContentView>

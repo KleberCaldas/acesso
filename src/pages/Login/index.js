@@ -25,7 +25,7 @@ export default function Login(){
     function handleLogin(){
         
         if (email === '' || password === ''){
-            console.log('Preencha todos os dados')
+            alert('Preencha todos os dados')
             return;
         }
         
@@ -34,7 +34,7 @@ export default function Login(){
     
     function handleSingUp(){
         if (email === '' || password === '' || name === ''){
-            console.log('Preencha todos os dados')
+            alert('Preencha todos os dados')
             return;
         }
         

@@ -39,11 +39,11 @@ function AuthProvider({children}){
             const userProfile = await firestore().collection('users')
             .doc(uid).get();
 
-            console.log(userProfile.data().nome);
+            console.log(userProfile.data().name);
 
             let data = {
                 uid: uid,
-                nome: userProfile.data().nome,
+                name: userProfile.data().name,
                 email: value.user.email
             };
 
@@ -65,12 +65,12 @@ function AuthProvider({children}){
             let uid = value.user.uid;
             await firestore().collection('users')
             .doc(uid).set({
-                nome: name
+                name: name
             })
             .then(() => {
                 let data = {
                     uid: uid,
-                    nome: name,
+                    name: name,
                     email: value.user.email
                 };
 
