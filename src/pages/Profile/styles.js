@@ -85,7 +85,7 @@ export const ButtonBack = styled.TouchableOpacity`
 export const Input = styled.TextInput`
     width: 90%;
     height: 50px;
-    margin-top: 20;
+    margin-top: -150px;
     background-color: #DDD;
     border-radius: 10px;
     padding: 10px;

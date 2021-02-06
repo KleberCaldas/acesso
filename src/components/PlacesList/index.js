@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Container, Header, Avatar, CompanyName, ContentView, Content, Actions ,MoreInformationButtom, EvaluatePlaceButtom, TextButtom, Grade } from './styles';
+import { Container, Header, Avatar, CompanyName, ContentView, AddressText, Actions ,MoreInformationButtom, EvaluatePlaceButtom, TextButtom, Grade } from './styles';
 import {useNavigation} from '@react-navigation/native';
 
 export default function PlacesList({data}){
@@ -35,12 +35,12 @@ export default function PlacesList({data}){
                     )
                 }
                 
-                <CompanyName numberOfLines={1}>{data?.name}</CompanyName>
+                <CompanyName numberOfLines={3}>{data?.name}</CompanyName>
             </Header>
 
             <ContentView>
-                <Content>{data?.address}</Content>
                 <Grade>{final_grade()}</Grade>
+                <AddressText>{data?.address}</AddressText>
             </ContentView>
 
             <Actions>

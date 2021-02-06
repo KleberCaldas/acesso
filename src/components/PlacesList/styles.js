@@ -23,17 +23,25 @@ export const Avatar = styled.Image`
 `;
 export const CompanyName = styled.Text`
     color: #353840;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
+    align-items: center;
+    margin-top: -45px;
+    left: -45px;
+    padding: 60px;
    
 `;
 
 export const ContentView = styled.View`
-
+    align-items: center;
+    margin-top: -40px;
+    
 `;
 
-export const Content = styled.Text`
-
+export const AddressText = styled.Text`
+    margin-top: 15px;
+    left: 5px;
+    
 `;
 
 export const Actions = styled.View`
@@ -45,7 +53,7 @@ export const Actions = styled.View`
 export const MoreInformationButtom = styled.TouchableOpacity`
     width: 150px;
     height: 40px
-    margin-top: 5px;
+    margin-top: 10px;
     flex-direction:row;
     align-items: center;
     justify-content: center;
@@ -57,7 +65,7 @@ export const MoreInformationButtom = styled.TouchableOpacity`
 export const EvaluatePlaceButtom = styled.TouchableOpacity`
     width: 150px;
     height: 40px;
-    margin-top: 5px;
+    margin-top: 10px;
     flex-direction:row;
     align-items: center;
     justify-content: center;
@@ -73,4 +81,8 @@ export const TextButtom = styled.Text`
 `;
 
 export const Grade = styled.Text`
+    font-size: 25px;
+    color: #bdb76b;
+    font-weight: bold;
+    left: 20px; 
 `;
