@@ -1,5 +1,5 @@
-import React, {useState, useLayoutEffect, useContext, useEffect} from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import React, {useState, useLayoutEffect, useContext} from 'react';
+import {View, ActivityIndicator} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Container, ListPlace } from './styles';
 import firestore from '@react-native-firebase/firestore';

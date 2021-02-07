@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { Container, Header, Avatar, CompanyName, ContentView, AddressText, Actions ,MoreInformationButtom, EvaluatePlaceButtom, TextButtom, Grade } from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -44,7 +43,8 @@ export default function PlacesList({data}){
             </ContentView>
 
             <Actions>
-                <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlace', {docId: data?.id})}>
+                <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlace', {name: data?.name, address: data?.address, phone: data?.phone, 
+                    category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade})}>
                     <TextButtom>Mais informações</TextButtom>
                 </MoreInformationButtom>
 

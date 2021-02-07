@@ -38,11 +38,26 @@ function StackScreen(){ //manager pages in stack
             <Stack.Screen 
                 name="AboutPlace" 
                 component={AboutPlace}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerTitle: 'Mais Informações',
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                }}
+                
             />
             
             <Stack.Screen 
                 name="EvaluatePlace" 
                 component={EvaluatePlace}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerTitle: 'Avaliar',
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                }}
             />
         </Stack.Navigator>
     );

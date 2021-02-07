@@ -3,11 +3,11 @@ import {View, Text} from 'react-native';
 
 export default function EvaluatePlace({route}){
     
-    const [docId] = useState(route.params.docId);
+    //const [docId] = useState(route.params.docId);
     
     return(
         <View>
-            <Text>{docId}</Text>
+            <Text>Teste</Text>
         </View>
     );
 }
