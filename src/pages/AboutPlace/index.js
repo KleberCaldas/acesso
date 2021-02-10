@@ -15,8 +15,7 @@ export default function AboutPlace({route}){
 
     return(
         <Container>
-
-{
+                    {
                     avatarUrl ?
                     ( //if place have image
                         <ImageAvatar

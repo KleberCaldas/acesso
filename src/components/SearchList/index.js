@@ -8,7 +8,8 @@ export default function SearchList({data}){
     const navigation = useNavigation();
 
     return(
-        <Container onPress = { () => navigation.navigate('AboutPlace', {docId: data.id})}>
+        <Container onPress = { () => navigation.navigate('AboutPlace', {name: data?.name, address: data?.address, phone: data?.phone, 
+            category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade})}>
             <CompanyName>{data.name}</CompanyName>
         </Container>
     );
