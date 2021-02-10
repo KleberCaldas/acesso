@@ -17,10 +17,12 @@ export const ButtonMenu = styled.TouchableOpacity`
     background-color: #bdb76b;
     
 `;
+    
 
 export const ButtonText = styled.Text`
     font-size: 25px;
     color: #FFF;
+    textAlign: center;
 `;
 
 export const ViewBtn = styled.View`
