@@ -44,7 +44,8 @@ function AuthProvider({children}){
             let data = {
                 uid: uid,
                 name: userProfile.data().name,
-                email: value.user.email
+                email: value.user.email,
+                category: value.user.category
             };
 
             setUser(data);
@@ -99,7 +100,7 @@ function AuthProvider({children}){
     }
 
     return(
-        <AuthContext.Provider value = {{ signed: !!user, user, signUp, signIn, signOut,loadingAuth, loading, storageUser, setUser}}>
+        <AuthContext.Provider value = {{signed: !!user, user, signUp, signIn, signOut,loadingAuth, loading, storageUser, setUser}}>
             {children}
         </AuthContext.Provider>
     );

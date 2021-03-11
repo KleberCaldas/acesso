@@ -1,15 +1,16 @@
 //Controller about auth.routes, collaborator.routes
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-
 import AuthRoutes from '../routes/auth.routes';
 import CollaboratorRoutes from '../routes/collaborator.routes';
+import OwnerRoutes from '../routes/owner.routes';
 import { AuthContext } from '../contexts/auth';
+ 
 
 function Routes(){
-    const {signed, loading} = useContext(AuthContext);
-
+    const {signed, loading, user} = useContext(AuthContext);
+    const userCategory = "owner";//useState(user?.category);
     if(loading){
         return(
             <View
@@ -24,11 +25,31 @@ function Routes(){
 
             </View>
         );
+        
     }
 
-    return (
+
+/*
+      return (
         signed ? <CollaboratorRoutes/> : <AuthRoutes/>
-    );
+   );
+*/
+
+    if(signed === true){
+        if(userCategory === "collaborator"){
+            return(<CollaboratorRoutes/>);
+        }
+        if(userCategory === "owner"){
+            return(<OwnerRoutes/>);
+        }
+        else{
+            return(<AuthRoutes/>);
+        }
+    }
+    else{
+        return(<AuthRoutes/>);
+    }    
+
 }
 
 export default Routes;
