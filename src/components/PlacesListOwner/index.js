@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Header, Avatar, CompanyName, ContentView, AddressText, Actions ,MoreInformationButtom, EvaluatePlaceButtom, TextButtom, Grade } from './styles';
 import {useNavigation} from '@react-navigation/native';
 
-export default function PlacesList({data}){
+export default function PlacesListOwner({data}){
     const navigation = useNavigation();
     
     function final_grade(grade){

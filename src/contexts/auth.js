@@ -72,7 +72,8 @@ function AuthProvider({children}){
                 let data = {
                     uid: uid,
                     name: name,
-                    email: value.user.email
+                    email: value.user.email,
+                    //category: value.user.category
                 };
 
             setUser(data);

@@ -41,3 +41,8 @@ export const ViewBtn = styled.View`
     flexDirection: row;
     justify-content: center;
 `;
+
+export const ListPlace = styled.FlatList`
+
+    
+`;

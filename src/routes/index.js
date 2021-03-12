@@ -1,4 +1,4 @@
-//Controller about auth.routes, collaborator.routes
+//Controller about auth.routes, collaborator.routes, owner.routes
 
 import React, { useContext, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
@@ -6,11 +6,11 @@ import AuthRoutes from '../routes/auth.routes';
 import CollaboratorRoutes from '../routes/collaborator.routes';
 import OwnerRoutes from '../routes/owner.routes';
 import { AuthContext } from '../contexts/auth';
- 
 
 function Routes(){
     const {signed, loading, user} = useContext(AuthContext);
     const userCategory = "owner";//useState(user?.category);
+    //alert(userCategory);
     if(loading){
         return(
             <View
