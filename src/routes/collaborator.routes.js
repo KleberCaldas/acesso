@@ -10,6 +10,7 @@ import Profile from '../pages/Profile';
 import PlaceList from '../pages/PlaceList';
 import AboutPlace from '../pages/AboutPlace';
 import EvaluatePlace from '../pages/EvaluatePlace';
+import Maps from '../pages/Maps';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -41,6 +42,19 @@ function StackScreen(){ //manager pages in stack
                 options ={{
                     headerTintColor: '#FFF',
                     headerTitle: 'Mais Informações',
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                }}
+                
+            />
+
+            <Stack.Screen 
+                name="Maps" 
+                component={Maps}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerTitle: 'Mapa',
                     headerStyle: {
                         backgroundColor: '#bdb76b'
                     }

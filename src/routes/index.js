@@ -9,7 +9,7 @@ import { AuthContext } from '../contexts/auth';
 
 function Routes(){
     const {signed, loading, user} = useContext(AuthContext);
-    const userCategory = "owner";//useState(user?.category);
+    const userCategory = "collaborator";//useState(user?.category);
     //alert(userCategory);
     if(loading){
         return(

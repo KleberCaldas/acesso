@@ -37,7 +37,7 @@ export default function AboutPlace({route}){
             
             <ContainerButton>
                 <OpenGoogleMapsButton>
-                    <ButtonText>Abrir com Googgle Maps</ButtonText>
+                    <ButtonText onPress = { ()=> navigation.navigate('Maps')}>Abrir com Googgle Maps</ButtonText>
                 </OpenGoogleMapsButton>
 
                 <EvaluateButton onPress = { ()=> navigation.navigate('EvaluatePlace')}>
