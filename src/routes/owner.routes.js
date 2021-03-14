@@ -8,7 +8,8 @@ import Home from '../pages/HomeOwner';
 import Profile from '../pages/Profile';
 import NewPlace from '../pages/NewPlace';
 import PlaceList from '../pages/PlaceList';
-import AboutPlace from '../pages/AboutPlace';
+import AboutPlaceOwner from '../pages/AboutPlaceOwner';
+import EditPlace from '../pages/EditPlace';
 
 
 const Tab = createBottomTabNavigator();
@@ -48,8 +49,8 @@ function StackScreen(){ //manager pages in stack
             />
             
             <Stack.Screen 
-                name="AboutPlace" 
-                component={AboutPlace}
+                name="AboutPlaceOwner" 
+                component={AboutPlaceOwner}
                 options ={{
                     headerTintColor: '#FFF',
                     headerTitle: 'Mais Informações',
@@ -57,7 +58,18 @@ function StackScreen(){ //manager pages in stack
                         backgroundColor: '#bdb76b'
                     }
                 }}
-                
+            />
+
+            <Stack.Screen 
+                name="EditPlace" 
+                component={EditPlace}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerTitle: 'Editar dados',
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                }}
             />
             
            
@@ -95,6 +107,18 @@ function OwnerRoutes(){
                     }
                 }}
             />
+
+            <Tab.Screen 
+                //name = "Profile"
+                name = "Perfil" 
+                component={Profile}
+                options ={{
+                    tabBarIcon :({ color, size}) => {
+                        return <Feather name = "user" color = {color} size = {size} />
+                    }
+                }}
+            />
+
         </Tab.Navigator>
     );
 }

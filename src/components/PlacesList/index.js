@@ -6,14 +6,18 @@ export default function PlacesList({data}){
     const navigation = useNavigation();
     
     function final_grade(grade){
-        grade = data.grade;
-        let n = grade.length
-        let sum = 0
-        for(let i in grade){
-            sum += grade[i]
+       try{
+            grade = data.grade;
+            let n = grade.length
+            let sum = 0
+            for(let i in grade){
+                sum += grade[i]
+            }
+            return sum/n;
         }
-        
-        return sum/n;
+        catch(error){
+            return "N/A";
+        }
     }
 
     return(

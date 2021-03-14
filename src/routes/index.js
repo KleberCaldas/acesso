@@ -9,8 +9,8 @@ import { AuthContext } from '../contexts/auth';
 
 function Routes(){
     const {signed, loading, user} = useContext(AuthContext);
-    const userCategory = "collaborator";//useState(user?.category);
-    //alert(userCategory);
+    const userCategory = "owner";//useState(user?.category);
+
     if(loading){
         return(
             <View
@@ -28,14 +28,8 @@ function Routes(){
         
     }
 
-
-/*
-      return (
-        signed ? <CollaboratorRoutes/> : <AuthRoutes/>
-   );
-*/
-
     if(signed === true){
+        
         if(userCategory === "collaborator"){
             return(<CollaboratorRoutes/>);
         }

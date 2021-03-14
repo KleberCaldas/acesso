@@ -66,14 +66,15 @@ function AuthProvider({children}){
             let uid = value.user.uid;
             await firestore().collection('users')
             .doc(uid).set({
-                name: name
+                name: name,
+                category: "collaborator",
             })
             .then(() => {
                 let data = {
                     uid: uid,
                     name: name,
                     email: value.user.email,
-                    //category: value.user.category
+                    category: value.user.category
                 };
 
             setUser(data);

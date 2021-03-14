@@ -1,24 +1,25 @@
 import React, { useLayoutEffect, useState, useContext } from 'react';
-import {View, Text} from 'react-native';
-import { Container, ButtonText, ButtonAdd, Input } from './styles';
+import {Text, ActivityIndicatorBase} from 'react-native';
+import { Container, ButtonText, ButtonAdd, Input, UpLoadButton
+    , UpLoadText, PickerChoice, View, ViewPicker } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import storage from '@react-native-firebase/storage';
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import {AuthContext} from '../../contexts/auth';
+import {Picker} from '@react-native-picker/picker';
 
 export default function NewPlace(){
 
     const navigation = useNavigation();
-    const [place, setplace] = useState('');
-    const {user} = useContext(AuthContext);
-    
+    const {user} = useContext(AuthContext);    
     const [namePlace, setNamePlace] = useState('');
     const [phonePlace, setPhonePlace] = useState('');
     const [addressPlace, setAddressPlace] = useState('');
     const [categoryPlace, setCategoryPlace] = useState('');
     const [latitudePlace, setLatitudePlace] = useState('');
     const [longitudePlace, setLongitudePlace] = useState('');
-    
+
+
     useLayoutEffect(() => {
         
         const options = navigation.setOptions({
@@ -28,7 +29,7 @@ export default function NewPlace(){
                 </ButtonAdd>
             )
         })
-    }, [navigation, place]);
+    }, [navigation, namePlace, phonePlace, addressPlace, categoryPlace, latitudePlace, longitudePlace]);
 
     async function handlePlace(){
        /* if (addressPlace === '' || categoryPlace === '' || namePlace === '' || longitudePlace === '' || latitudePlace === '' || phonePlace === ''){
@@ -78,42 +79,58 @@ export default function NewPlace(){
     }
 
     return(
-        <Container>
-            <Input
-                placeholder = "Razão social"
-                value = {namePlace}
-                onChangeText = { (text) => setNamePlace(text)}
-            />
+        <View>
+            <Container>
 
-            <Input
-                placeholder = "(DD) 99999-9999"
-                value = {phonePlace}
-                onChangeText = { (text) => setPhonePlace(text)}
-            />
+                <UpLoadButton onPress={() => alert("clicou")}>
+                    <UpLoadText>+</UpLoadText>
+                </UpLoadButton>
+                
+                <Input
+                    placeholder = "Razão social"
+                    value = {namePlace}
+                    onChangeText = { (text) => setNamePlace(text)}
+                />
 
-            <Input
-                placeholder = "Endereço"
-                value = {addressPlace}
-                onChangeText = { (text) => setAddressPlace(text)}
-            />
+                <Input
+                    placeholder = "(DD) 99999-9999"
+                    value = {phonePlace}
+                    onChangeText = { (text) => setPhonePlace(text)}
+                />
+
+                <Input
+                    placeholder = "Endereço"
+                    value = {addressPlace}
+                    onChangeText = { (text) => setAddressPlace(text)}
+                />
+                </Container>
             
-            <Input 
-                placeholder = "Categoria"
-                value = {categoryPlace}
-                onChangeText = { (text) => setCategoryPlace(text)}
-            />
+                <ViewPicker>
+                    <PickerChoice selectedValue = {categoryPlace}
+                        onValueChange = {(text) => setCategoryPlace(text)
+                        }>
+                        <PickerChoice.item key={1} value={"restaurants"} label ="Restaurantes" />
+                        <PickerChoice.item key={2} value={"shopping"} label ="Compras" />
+                        <PickerChoice.item key={3} value={"recreation"} label ="Lazer" />
+                        <PickerChoice.item key={4} value={"education"} label ="Educação" />
+                        <PickerChoice.item key={5} value={"public_service"} label ="Serviço Público" />
+                        <PickerChoice.item key={2} value={"health"} label ="Saúde" />
+                    </PickerChoice>
+                </ViewPicker>
+                
+                <Container>
+                    <Input
+                        placeholder = "Latitude"
+                        value = {latitudePlace}
+                        onChangeText = { (text) => setLatitudePlace(text)}
+                    />
 
-            <Input
-                placeholder = "Latitude"
-                value = {latitudePlace}
-                onChangeText = { (text) => setLatitudePlace(text)}
-            />
-
-            <Input
-                placeholder = "Longitude"
-                value = {longitudePlace}
-                onChangeText = { (text) => setLongitudePlace(text)}
-            />
-        </Container>
+                    <Input
+                        placeholder = "Longitude"
+                        value = {longitudePlace}
+                        onChangeText = { (text) => setLongitudePlace(text)}
+                    />
+                </Container>
+        </View>
     );
 }
