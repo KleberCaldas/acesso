@@ -1,12 +1,14 @@
 import React, { useLayoutEffect, useState, useContext } from 'react';
 import {Text, ActivityIndicatorBase} from 'react-native';
 import { Container, ButtonText, ButtonAdd, Input, UpLoadButton
-    , UpLoadText, PickerChoice, View, ViewPicker } from './styles';
+    , UpLoadText, PickerChoice, View, ViewPicker,
+    ButtonGetLocation } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import storage from '@react-native-firebase/storage';
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import {AuthContext} from '../../contexts/auth';
 import {Picker} from '@react-native-picker/picker';
+import Feather from 'react-native-vector-icons/Feather';
 
 export default function NewPlace(){
 
@@ -109,12 +111,12 @@ export default function NewPlace(){
                     <PickerChoice selectedValue = {categoryPlace}
                         onValueChange = {(text) => setCategoryPlace(text)
                         }>
-                        <PickerChoice.item key={1} value={"restaurants"} label ="Restaurantes" />
-                        <PickerChoice.item key={2} value={"shopping"} label ="Compras" />
-                        <PickerChoice.item key={3} value={"recreation"} label ="Lazer" />
-                        <PickerChoice.item key={4} value={"education"} label ="Educação" />
-                        <PickerChoice.item key={5} value={"public_service"} label ="Serviço Público" />
-                        <PickerChoice.item key={2} value={"health"} label ="Saúde" />
+                        <Picker.item key={1} value={'restaurants'} label ="Restaurantes" />
+                        <Picker.item key={2} value={'shopping'} label ="Compras" />
+                        <Picker.item key={3} value={'recreation'} label ="Lazer" />
+                        <Picker.item key={4} value={'education'} label ="Educação" />
+                        <Picker.item key={5} value={'public_service'} label ="Serviço Público" />
+                        <Picker.item key={2} value={'health'} label ="Saúde" />
                     </PickerChoice>
                 </ViewPicker>
                 
@@ -130,6 +132,16 @@ export default function NewPlace(){
                         value = {longitudePlace}
                         onChangeText = { (text) => setLongitudePlace(text)}
                     />
+
+                    <ButtonGetLocation onPress ={()=>alert('Pegar posição')}>
+                        <Feather
+                            name = "map-pin"
+                            color = "#FFF"
+                            size = {30}
+                        />
+
+                    </ButtonGetLocation>
+
                 </Container>
         </View>
     );

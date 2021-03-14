@@ -11,6 +11,7 @@ export const ViewPicker = styled.View`
     margin-left: 10%;
     background-color: #EEE;
     border-radius: 7px;
+    
 `;
 
 export const Container = styled.View`
@@ -42,9 +43,7 @@ export const Input = styled.TextInput`
 `;
 
 export const PickerChoice = styled.Picker`
-    color: #808080;
-    border-radius: 7px;
-    font-size: 17px;
+color: #808080;
     
 `;
 
@@ -66,5 +65,16 @@ export const UpLoadText = styled.Text`
     font-size: 60px;
     color: #bdb76b;
     opacity: 0.8;
+`;
 
+export const ButtonGetLocation = styled.TouchableOpacity`
+    background-color: #418cfd;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    justify-content: center
+    align-items: center;
+    position: absolute;
+    bottom: 5%
+    right: 5%; 
 `;
