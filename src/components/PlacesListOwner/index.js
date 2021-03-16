@@ -46,7 +46,7 @@ export default function PlacesListOwner({data}){
             </ContentView>
 
             <Actions>
-                <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlaceOwner', {name: data?.name, address: data?.address, phone: data?.phone, 
+                <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlaceOwner', {docId: data?.id, name: data?.name, address: data?.address, phone: data?.phone, 
                     category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade})}>
                     <TextButtom>Mais informações</TextButtom>
                 </MoreInformationButtom>

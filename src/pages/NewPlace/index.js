@@ -11,7 +11,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import storage from '@react-native-firebase/storage';
 import ImagePicker from 'react-native-image-picker';
 
-
 export default function NewPlace(){
 
     const navigation = useNavigation();
@@ -22,7 +21,7 @@ export default function NewPlace(){
     const [categoryPlace, setCategoryPlace] = useState('');
     const [latitudePlace, setLatitudePlace] = useState('');
     const [longitudePlace, setLongitudePlace] = useState('');
-
+    const [docReference] = useState('');
 
     useLayoutEffect(() => {
         
@@ -68,7 +67,10 @@ export default function NewPlace(){
             latitude: latitudePlace,
             longitude: longitudePlace,
         })
-        .then(() => {
+        .then((docRef) => {
+            console.log("DocRef: ", docRef.id);
+            //docReference = docRef.id;
+            //console.log("DocReference: ", docRef.id);
             alert('Local cadastrado com sucesso!');
             setAddressPlace('');
             setCategoryPlace('');
@@ -94,9 +96,9 @@ export default function NewPlace(){
                 console.log('Cancelou');
             }else if(response.error){
                 console.log('Ops, aconteceu algo inesperado')
-            }else{
-                uploadPictureFirebase(response);
-            }
+            }//else{
+               // uploadPictureFirebase(response);
+           // }
             
         })
     }
@@ -106,9 +108,10 @@ export default function NewPlace(){
         return Platform.OS === 'android' ? path: uri; 
     }
 
+    
     const uploadPictureFirebase = async response =>{
         const pictureSource = getPictureLocalPath(response);
-        const storageRef = storage().ref('RJ').child('teste');
+        const storageRef = storage().ref('RJ').child('teste'); //docRef.id
         return await storageRef.putFile(pictureSource);
     }
 
@@ -138,7 +141,7 @@ export default function NewPlace(){
                     onChangeText = { (text) => setAddressPlace(text)}
                 />
                 </Container>
-            
+                
                 <ViewPicker>
                     <PickerChoice selectedValue = {categoryPlace}
                         onValueChange = {(text) => setCategoryPlace(text)

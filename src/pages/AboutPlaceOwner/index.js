@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { Container, OpenGoogleMapsButton, ButtonText, EvaluateButton, ContainerButton, ImageAvatar,
+import { Container, DeleteButton, ButtonText, EditButton, ContainerButton, ImageAvatar,
      Title, Address} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+
 
 export default function AboutPlaceOwner({route}){
     
+    const [docId] = useState(route.params.docId);
     const [name] = useState(route.params.name);
     const [address] = useState(route.params.address);
     const [phone] = useState(route.params.phone);
@@ -12,6 +15,15 @@ export default function AboutPlaceOwner({route}){
     const [grade] = useState(route.params.grade);
     const [avatarUrl] = useState(route.params.avatarUrl);
     const navigation = useNavigation();
+
+    function deletePlace(){
+        firestore().collection('RJ') .doc(docId).delete()
+        .then(() => {
+            alert('Local removido');
+            navigation.navigate('HomeOwner');
+        
+        });
+    }
 
     return(
         <Container>
@@ -36,13 +48,13 @@ export default function AboutPlaceOwner({route}){
             <Address>{grade}</Address>
             
             <ContainerButton>
-                <OpenGoogleMapsButton>
-                    <ButtonText onPress = { ()=> navigation.navigate('Maps')}>Abrir com Googgle Maps</ButtonText>
-                </OpenGoogleMapsButton>
+                <DeleteButton>
+                    <ButtonText onPress = {() => deletePlace()}>Excluir</ButtonText>
+                </DeleteButton>
 
-                <EvaluateButton onPress = { ()=> navigation.navigate('EditPlace')}>
+                <EditButton onPress = { ()=> navigation.navigate('EditPlace')}>
                     <ButtonText>Editar</ButtonText>
-                </EvaluateButton>
+                </EditButton>
             </ContainerButton>
         
         </Container>

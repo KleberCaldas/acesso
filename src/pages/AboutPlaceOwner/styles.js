@@ -9,11 +9,11 @@ export const ContainerButton = styled.View`
 flex-direction:row;
 `;
 
-export const OpenGoogleMapsButton = styled.TouchableOpacity`
+export const DeleteButton = styled.TouchableOpacity`
     margin-top: 20px;
     align-items: center;
     justify-content: center;
-    background-color: #6495ed;
+    background-color: #e52246;
     width: 40%;
     height: 50%;
     border-radius: 8px;
@@ -27,11 +27,11 @@ export const ButtonText = styled.Text`
     textAlign: center;
 `;
 
-export const EvaluateButton = styled.TouchableOpacity`
+export const EditButton = styled.TouchableOpacity`
     margin-top: 20px;
     align-items: center;
     justify-content: center;
-    background-color: #e52246;
+    background-color: #6495ed;
     width: 40%;
     height: 50%;
     border-radius: 8px;
