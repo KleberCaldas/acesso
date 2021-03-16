@@ -16,7 +16,7 @@ export default function HomeOwner(){
     
     useLayoutEffect(() => {
         // flatList
-    
+        
         const subscriber = firestore()
         .collection("RJ")
         .where("agent", "==", user?.uid)

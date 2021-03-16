@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const View = styled.View`
 background-color: #bdb76b;
-
+flex:1
 `;
 
 export const ViewPicker = styled.View`
@@ -77,4 +77,12 @@ export const ButtonGetLocation = styled.TouchableOpacity`
     position: absolute;
     bottom: 5%
     right: 5%; 
+`;
+
+export const Avatar = styled.Image`
+margin-top: 5%;
+width: 160px;
+height: 160px;
+border-radius: 80px;
+opacity: 0.9;
 `;

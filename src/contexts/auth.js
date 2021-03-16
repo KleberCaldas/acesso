@@ -40,12 +40,13 @@ function AuthProvider({children}){
             .doc(uid).get();
 
             console.log(userProfile.data().name);
+            console.log(userProfile.data().category);
 
             let data = {
                 uid: uid,
                 name: userProfile.data().name,
                 email: value.user.email,
-                category: value.user.category
+                category: userProfile.data().category,
             };
 
             setUser(data);
@@ -94,6 +95,7 @@ function AuthProvider({children}){
         .then(() => {
             setUser(null);
         })
+        setLoadingAuth(false);
     }
 
 

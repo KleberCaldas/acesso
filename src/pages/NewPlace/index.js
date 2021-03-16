@@ -1,14 +1,16 @@
 import React, { useLayoutEffect, useState, useContext } from 'react';
-import {Text, ActivityIndicatorBase} from 'react-native';
+import {Platform} from 'react-native';
 import { Container, ButtonText, ButtonAdd, Input, UpLoadButton
     , UpLoadText, PickerChoice, View, ViewPicker,
     ButtonGetLocation } from './styles';
 import {useNavigation} from '@react-navigation/native';
-import storage from '@react-native-firebase/storage';
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import {AuthContext} from '../../contexts/auth';
 import {Picker} from '@react-native-picker/picker';
 import Feather from 'react-native-vector-icons/Feather';
+import storage from '@react-native-firebase/storage';
+import ImagePicker from 'react-native-image-picker';
+
 
 export default function NewPlace(){
 
@@ -80,11 +82,41 @@ export default function NewPlace(){
         })
     }
 
+    const uploadPicture = () => {
+
+        const options ={
+            noData: true,
+            mediaType: 'photo'
+        };
+
+        ImagePicker.launchImageLibrary(options, response =>{
+            if(response.didCancel){
+                console.log('Cancelou');
+            }else if(response.error){
+                console.log('Ops, aconteceu algo inesperado')
+            }else{
+                uploadPictureFirebase(response);
+            }
+            
+        })
+    }
+
+    const getPictureLocalPath = response => {
+        const {path, uri} = response;
+        return Platform.OS === 'android' ? path: uri; 
+    }
+
+    const uploadPictureFirebase = async response =>{
+        const pictureSource = getPictureLocalPath(response);
+        const storageRef = storage().ref('RJ').child('teste');
+        return await storageRef.putFile(pictureSource);
+    }
+
     return(
         <View>
             <Container>
 
-                <UpLoadButton onPress={() => alert("clicou")}>
+                <UpLoadButton onPress={uploadPicture}>
                     <UpLoadText>+</UpLoadText>
                 </UpLoadButton>
                 
