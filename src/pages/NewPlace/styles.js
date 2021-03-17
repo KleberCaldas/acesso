@@ -80,9 +80,8 @@ export const ButtonGetLocation = styled.TouchableOpacity`
 `;
 
 export const Avatar = styled.Image`
-margin-top: 5%;
+
 width: 160px;
 height: 160px;
-border-radius: 80px;
-opacity: 0.9;
+border-radius: 20px;
 `;

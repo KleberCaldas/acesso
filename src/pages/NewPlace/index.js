@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useState, useContext } from 'react';
 import {Platform} from 'react-native';
 import { Container, ButtonText, ButtonAdd, Input, UpLoadButton
     , UpLoadText, PickerChoice, View, ViewPicker,
-    ButtonGetLocation } from './styles';
+    ButtonGetLocation, Avatar } from './styles';
 import {useNavigation} from '@react-navigation/native';
-import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 import {AuthContext} from '../../contexts/auth';
 import {Picker} from '@react-native-picker/picker';
 import Feather from 'react-native-vector-icons/Feather';
@@ -21,8 +21,9 @@ export default function NewPlace(){
     const [categoryPlace, setCategoryPlace] = useState('');
     const [latitudePlace, setLatitudePlace] = useState('');
     const [longitudePlace, setLongitudePlace] = useState('');
-    const [docReference] = useState('');
-
+    //const [avatarURL] = useState(null);
+    const [url, setUrl] = useState(null);
+    
     useLayoutEffect(() => {
         
         const options = navigation.setOptions({
@@ -35,32 +36,12 @@ export default function NewPlace(){
     }, [navigation, namePlace, phonePlace, addressPlace, categoryPlace, latitudePlace, longitudePlace]);
 
     async function handlePlace(){
-       /* if (addressPlace === '' || categoryPlace === '' || namePlace === '' || longitudePlace === '' || latitudePlace === '' || phonePlace === ''){
-            alert('Cadastro com conteúdo inválido');
-            return;
-        }
-        else{
-            setAddressPlace('');
-            setCategoryPlace('');
-            setLatitudePlace('');
-            setLongitudePlace('');
-            setNamePlace('');
-            setPhonePlace('');
-        }
 
-
-
-        try{
-            let response = await storage.ref('places').child(user?.id).getDowloadURL();
-            avatarURL = response;
-        }catch(error){
-            avatarURL = null;
-        }*/
         await firestore().collection('RJ')
         .add({
             address: addressPlace,
             agent: user.uid,
-           // avatarURL,
+            //avatarURL,
             category: categoryPlace,
             name: namePlace,
             phone: phonePlace,
@@ -68,19 +49,18 @@ export default function NewPlace(){
             longitude: longitudePlace,
         })
         .then((docRef) => {
-            console.log("DocRef: ", docRef.id);
-            //docReference = docRef.id;
-            //console.log("DocReference: ", docRef.id);
-            alert('Local cadastrado com sucesso!');
+            
+            //alert('Local cadastrado com sucesso!');
             setAddressPlace('');
             setCategoryPlace('');
             setLatitudePlace('');
             setLongitudePlace('');
             setNamePlace('');
             setPhonePlace('');
+            
         })
         .catch((error) => {
-            alert('Ops! Deu um erro, tente novamente mais tarde!');
+            //alert('Ops! Deu um erro, tente novamente mais tarde!');
         })
     }
 
@@ -96,9 +76,10 @@ export default function NewPlace(){
                 console.log('Cancelou');
             }else if(response.error){
                 console.log('Ops, aconteceu algo inesperado')
-            }//else{
-               // uploadPictureFirebase(response);
-           // }
+            }else{
+                uploadPictureFirebase(response);
+                setUrl(response.uri);
+            }
             
         })
     }
@@ -111,18 +92,31 @@ export default function NewPlace(){
     
     const uploadPictureFirebase = async response =>{
         const pictureSource = getPictureLocalPath(response);
-        const storageRef = storage().ref('RJ').child('teste'); //docRef.id
+
+        //tenho que concatenar user.uid + data do sistema
+        const storageRef = storage().ref('RJ').child(user?.uid);
         return await storageRef.putFile(pictureSource);
     }
 
     return(
         <View>
             <Container>
-
-                <UpLoadButton onPress={uploadPicture}>
+            {
+                url ?
+                (
+                    <UpLoadButton onPress={ uploadPicture }>
+                    <UpLoadText></UpLoadText>
+                    <Avatar
+                    source={{ uri: url }}
+                    />
+                    </UpLoadButton>
+                ) : 
+                (
+                    <UpLoadButton onPress={ uploadPicture }>
                     <UpLoadText>+</UpLoadText>
-                </UpLoadButton>
-                
+                    </UpLoadButton>   
+                )
+            }
                 <Input
                     placeholder = "Razão social"
                     value = {namePlace}
@@ -143,7 +137,7 @@ export default function NewPlace(){
                 </Container>
                 
                 <ViewPicker>
-                    <PickerChoice selectedValue = {categoryPlace}
+                    <PickerChoice //selectedValue = {categoryPlace}
                         onValueChange = {(text) => setCategoryPlace(text)
                         }>
                         <Picker.item key={1} value={'restaurants'} label ="Restaurantes" />

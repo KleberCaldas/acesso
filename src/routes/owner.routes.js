@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Feather from 'react-native-vector-icons/Feather';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../pages/HomeOwner';
+import HomeOwner from '../pages/HomeOwner';
 import Profile from '../pages/Profile';
 import NewPlace from '../pages/NewPlace';
 import PlaceList from '../pages/PlaceList';
@@ -19,8 +19,8 @@ function StackScreen(){ //manager pages in stack
     return(
         <Stack.Navigator>
             <Stack.Screen 
-                name="Home" 
-                component={Home} 
+                name="HomeOwner" 
+                component={HomeOwner} 
                 options={{headerShown:false}}
             />
 
