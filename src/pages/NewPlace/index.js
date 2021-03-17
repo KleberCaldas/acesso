@@ -92,9 +92,12 @@ export default function NewPlace(){
     
     const uploadPictureFirebase = async response =>{
         const pictureSource = getPictureLocalPath(response);
-
-        //tenho que concatenar user.uid + data do sistema
-        const storageRef = storage().ref('RJ').child(user?.uid);
+        // create a seed to sum (userId + date)
+        var now = new Date();
+        now = (now.getFullYear().toString()) + (now.getMonth().toString())+ +(now.getDay().toString())+ (now.getHours()).toString() + (now.getMinutes()).toString();
+        const photoId = (user?.uid).toString() + now.toString();
+        //
+        const storageRef = storage().ref('RJ').child(photoId);
         return await storageRef.putFile(pictureSource);
     }
 
