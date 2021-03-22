@@ -14,6 +14,8 @@ export default function AboutPlaceOwner({route}){
     const [category] = useState(route.params.category);
     const [grade] = useState(route.params.grade);
     const [avatarUrl] = useState(route.params.avatarUrl);
+    const [latitude] = useState(route.params.latitude);
+    const [longitude] = useState(route.params.longitude);
     const navigation = useNavigation();
 
     function deletePlace(){
@@ -52,7 +54,8 @@ export default function AboutPlaceOwner({route}){
                     <ButtonText onPress = {() => deletePlace()}>Excluir</ButtonText>
                 </DeleteButton>
 
-                <EditButton onPress = { ()=> navigation.navigate('EditPlace')}>
+                <EditButton onPress = { ()=> navigation.navigate('EditPlace', {docId: docId, name: name, address: address, phone: phone, 
+                    category: category, latitude: latitude, longitude: longitude, avatarUrl: avatarUrl})}>
                     <ButtonText>Editar</ButtonText>
                 </EditButton>
             </ContainerButton>

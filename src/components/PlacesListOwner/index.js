@@ -51,7 +51,8 @@ export default function PlacesListOwner({data}){
                     <TextButtom>Mais informações</TextButtom>
                 </MoreInformationButtom>
 
-                <EvaluatePlaceButtom onPress = {()=> navigation.navigate('EditPlace', {docId: data?.id})}>
+                <EvaluatePlaceButtom onPress = {()=> navigation.navigate('EditPlace', {docId: data?.id, name: data?.name, address: data?.address, phone: data?.phone, 
+                    category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade, latitude: data?.latitude, longitude: data?.longitude, avatarUrl: data?.avatarUrl})}>
                     <TextButtom>Editar</TextButtom>
                 </EvaluatePlaceButtom>
             </Actions>

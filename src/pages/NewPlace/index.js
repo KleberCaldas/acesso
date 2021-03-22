@@ -21,7 +21,6 @@ export default function NewPlace(){
     const [categoryPlace, setCategoryPlace] = useState('');
     const [latitudePlace, setLatitudePlace] = useState('');
     const [longitudePlace, setLongitudePlace] = useState('');
-    //const [avatarURL] = useState(null);
     const [url, setUrl] = useState(null);
     
     useLayoutEffect(() => {
@@ -35,35 +34,7 @@ export default function NewPlace(){
         })
     }, [navigation, namePlace, phonePlace, addressPlace, categoryPlace, latitudePlace, longitudePlace]);
 
-    async function handlePlace(){
-
-        await firestore().collection('RJ')
-        .add({
-            address: addressPlace,
-            agent: user.uid,
-            //avatarURL,
-            category: categoryPlace,
-            name: namePlace,
-            phone: phonePlace,
-            latitude: latitudePlace,
-            longitude: longitudePlace,
-        })
-        .then((docRef) => {
-            
-            //alert('Local cadastrado com sucesso!');
-            setAddressPlace('');
-            setCategoryPlace('');
-            setLatitudePlace('');
-            setLongitudePlace('');
-            setNamePlace('');
-            setPhonePlace('');
-            
-        })
-        .catch((error) => {
-            //alert('Ops! Deu um erro, tente novamente mais tarde!');
-        })
-    }
-
+    
     const uploadPicture = () => {
 
         const options ={
@@ -95,12 +66,51 @@ export default function NewPlace(){
         // create a seed to sum (userId + date)
         var now = new Date();
         now = (now.getFullYear().toString()) + (now.getMonth().toString())+ +(now.getDay().toString())+ (now.getHours()).toString() + (now.getMinutes()).toString();
-        const photoId = (user?.uid).toString() + now.toString();
-        //
+        var photoId = (user?.uid).toString() + now.toString();
         const storageRef = storage().ref('RJ').child(photoId);
+
         return await storageRef.putFile(pictureSource);
     }
+    
+    async function handlePlace(){
 
+        let avatarUrl = null;
+        try{
+            let response = await storage().ref('RJ').child(photoId).getDownloadURL();
+            avatarUrl = response;
+
+            }catch(error){
+            avatarUrl = null;
+        }
+
+        await firestore().collection('RJ')
+        .add({
+            address: addressPlace,
+            agent: user.uid,
+            avatarUrl,
+            category: categoryPlace,
+            name: namePlace,
+            phone: phonePlace,
+            latitude: latitudePlace,
+            longitude: longitudePlace,
+        })
+        .then(() => {
+            
+            alert('Local cadastrado com sucesso!');
+            setAddressPlace('');
+            setCategoryPlace('');
+            setLatitudePlace('');
+            setLongitudePlace('');
+            setNamePlace('');
+            setPhonePlace('');
+            
+        })
+        .catch((error) => {
+            alert('Ops! Deu um erro, tente novamente mais tarde!');
+        })
+    }
+
+    
     return(
         <View>
             <Container>
@@ -140,7 +150,7 @@ export default function NewPlace(){
                 </Container>
                 
                 <ViewPicker>
-                    <PickerChoice //selectedValue = {categoryPlace}
+                    <PickerChoice selectedValue = {categoryPlace}
                         onValueChange = {(text) => setCategoryPlace(text)
                         }>
                         <Picker.item key={1} value={'restaurants'} label ="Restaurantes" />
