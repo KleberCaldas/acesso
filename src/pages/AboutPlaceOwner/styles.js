@@ -58,9 +58,9 @@ export const Address = styled.Text`
 `;
 
 export const ImageAvatar = styled.Image`
-    width: 150px;
-    height: 150px;
-    border-radius: 75px;
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
     margin-right: 10px;
     margin-top: 20px;
 `;
