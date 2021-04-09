@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
+import Dialog from 'react-native-dialog';
 
 export default function EvaluatePlace({route}){
     
@@ -7,7 +8,14 @@ export default function EvaluatePlace({route}){
     
     return(
         <View>
-            <Text>Teste</Text>
+            <Dialog.Container visible={true}>
+                <Dialog.Title>Pergunta 1</Dialog.Title>
+                <Dialog.Description>
+                    Qual foi sua experiência com corrimões, elevadores e rampas?
+                </Dialog.Description>
+                <Dialog.Button label="Voltar" />
+                <Dialog.Button label="Continuar" />
+            </Dialog.Container>
         </View>
     );
 }

@@ -41,7 +41,7 @@ export default function EditPlace({route}){
                     longitude: longitudePlace
             })
             alert('Dados alterados com sucesso!');
-            navigation.goBack();
+            navigation.navigate('PlaceListOwner')
         }
         catch(error){
             alert('Ops, ocorreu algum erro, tente novamente mais tarde!');
