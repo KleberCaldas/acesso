@@ -10,6 +10,7 @@ import {Picker} from '@react-native-picker/picker';
 import Feather from 'react-native-vector-icons/Feather';
 import storage from '@react-native-firebase/storage';
 import ImagePicker from 'react-native-image-picker';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function NewPlace(){
 
@@ -70,6 +71,20 @@ export default function NewPlace(){
         const storageRef = storage().ref('RJ').child(photoId);
 
         return await storageRef.putFile(pictureSource);
+    }
+
+
+    const getLocation = () => {
+        Geolocation.getCurrentPosition(
+        (position) => {
+            const lat = JSON.stringify(position.coords.latitude);
+            const long = JSON.stringify(position.coords.longitude);
+            setLatitudePlace(lat);
+            setLongitudePlace(long);
+        },
+            (error) => alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
     }
     
     async function handlePlace(){
@@ -175,7 +190,7 @@ export default function NewPlace(){
                         onChangeText = { (text) => setLongitudePlace(text)}
                     />
 
-                    <ButtonGetLocation onPress ={()=>alert('Pegar posição')}>
+                    <ButtonGetLocation onPress ={()=>getLocation()}>
                         <Feather
                             name = "map-pin"
                             color = "#FFF"
