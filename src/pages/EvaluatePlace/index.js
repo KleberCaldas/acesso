@@ -6,40 +6,54 @@ import {AirbnbRating} from 'react-native-ratings';
 export default function EvaluatePlace({route}){
     
     //const [docId] = useState(route.params.docId);
+
+    let evaluate_grade =[];
+    let grade;
+    let questions = ["Pergunta 1", "Pergunta 2"];
+
     const [visible, setVisible] = useState(true);
     
     function ratingCompleted(rating) {
         console.log("Rating is: " + rating);
+        grade = rating;
     }
 
     const showDialog = () => {
         setVisible(true);
-      };
+    };
     
     const handleCancel = () => {
         setVisible(false);
-      };
+    };
 
-    return(
-        <View>
-            <Dialog.Container visible={visible}>
-                <Dialog.Title>Pergunta 1/6</Dialog.Title>
-                <Dialog.Description>
-                    Qual foi sua experiência com corrimões, elevadores e rampas?
-                </Dialog.Description>
-                <View>
+    const handleContinue = () =>{
+        evaluate_grade.push(grade);
+        alert(evaluate_grade);
+    };
 
-                <AirbnbRating
-                    count={5}
-                    reviews={["Péssimo", "Ruim", "OK", "Bom", "Excelente"]}
-                    defaultRating={3}
-                    size={40}
-                    onFinishRating={(rating)=> ratingCompleted(rating)}
-                />
-                </View>
-                <Dialog.Button label="Cancelar" onPress = {handleCancel}/>
-                <Dialog.Button label="Continuar" />
-            </Dialog.Container>
-        </View>
-    );
+    
+    for(let i=0; i < questions.length; i++){
+        return(
+            <View>
+                <Dialog.Container visible={visible}>
+                    <Dialog.Title>{questions[i]+ "/"+ questions.length}</Dialog.Title>
+                    <Dialog.Description>
+                        {questions[i]}
+                    </Dialog.Description>
+                    <View>
+                    <AirbnbRating
+                        count={5}
+                        reviews={["Péssimo", "Ruim", "OK", "Bom", "Excelente"]}
+                        defaultRating={3}
+                        size={40}
+                        onFinishRating={(rating)=> ratingCompleted(rating)}
+                    />
+                    </View>
+                    <Dialog.Button label="Cancelar" onPress = {handleCancel}/>
+                    <Dialog.Button label="Continuar" onPress = {handleContinue}/>
+                </Dialog.Container>
+            </View>
+        );
+    }
+
 }
