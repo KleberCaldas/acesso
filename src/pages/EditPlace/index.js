@@ -5,6 +5,7 @@ import {Picker} from '@react-native-picker/picker';
 import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function EditPlace({route}){
     const [docId] = useState(route.params.docId);
@@ -47,6 +48,19 @@ export default function EditPlace({route}){
             alert('Ops, ocorreu algum erro, tente novamente mais tarde!');
             console.log(error);
         }
+    }
+
+    const getLocation = () => {
+        Geolocation.getCurrentPosition(
+        (position) => {
+            const lat = JSON.stringify(position.coords.latitude);
+            const long = JSON.stringify(position.coords.longitude);
+            setLatitudePlace(lat);
+            setLongitudePlace(long);
+        },
+            (error) => alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
     }
 
     return(
@@ -113,9 +127,7 @@ export default function EditPlace({route}){
                         onChangeText = { (text) => setLongitudePlace(text)}
                     />
 
-                   
-
-                    <ButtonGetLocation onPress ={()=>alert('Pegar posição')}>
+                    <ButtonGetLocation onPress ={()=>getLocation()}>
                         <Feather
                             name = "map-pin"
                             color = "#FFF"
