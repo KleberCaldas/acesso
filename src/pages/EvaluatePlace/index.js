@@ -2,14 +2,16 @@ import React, {useState} from 'react';
 import {View, Text, Button} from 'react-native';
 import Dialog from 'react-native-dialog';
 import {AirbnbRating} from 'react-native-ratings';
+import {useNavigation} from '@react-navigation/native';
 
 export default function EvaluatePlace({route}){
     
     //const [docId] = useState(route.params.docId);
 
     let evaluate_grade =[];
-    let grade;
+    let grade = 3; //initial rating in star
     let questions = ["Pergunta 1", "Pergunta 2"];
+    const navigation = useNavigation();
 
     const [visible, setVisible] = useState(true);
     
@@ -29,16 +31,15 @@ export default function EvaluatePlace({route}){
     const handleContinue = () =>{
         evaluate_grade.push(grade);
         alert(evaluate_grade);
+        navigation.navigate('EvaluatePlace');
     };
 
-    
-    for(let i=0; i < questions.length; i++){
         return(
             <View>
-                <Dialog.Container visible={visible}>
-                    <Dialog.Title>{questions[i]+ "/"+ questions.length}</Dialog.Title>
+                <Dialog.Container visible={visible} onBackdropPress={handleCancel}>
+                    <Dialog.Title>Questão 1/6</Dialog.Title>
                     <Dialog.Description>
-                        {questions[i]}
+                        Qual nota você daria para rampas, corredores ?
                     </Dialog.Description>
                     <View>
                     <AirbnbRating
@@ -50,10 +51,8 @@ export default function EvaluatePlace({route}){
                     />
                     </View>
                     <Dialog.Button label="Cancelar" onPress = {handleCancel}/>
-                    <Dialog.Button label="Continuar" onPress = {handleContinue}/>
+                    <Dialog.Button label="Continuar" onPress = { handleContinue}/>
                 </Dialog.Container>
             </View>
         );
-    }
-
 }
