@@ -89,8 +89,7 @@ export default function PlaceList({route}){
                 />
             )
         }
-
-
+        
         </Container>
         
     );

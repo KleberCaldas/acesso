@@ -11,6 +11,9 @@ import PlaceList from '../pages/PlaceList';
 import AboutPlace from '../pages/AboutPlace';
 import EvaluatePlace from '../pages/EvaluatePlace';
 import Maps from '../pages/Maps';
+import Question1 from '../pages/EvaluatePlace/Question1';
+import Question2 from '../pages/EvaluatePlace/Question2';
+import FinishedEvaluate from '../pages/EvaluatePlace/FinishedEvaluate';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -67,12 +70,53 @@ function StackScreen(){ //manager pages in stack
                 component={EvaluatePlace}
                 options ={{
                     headerTintColor: '#FFF',
-                    headerTitle: 'Avaliar',
+                    headerShown:false,
                     headerStyle: {
                         backgroundColor: '#bdb76b'
                     }
+                    
                 }}
             />
+
+            <Stack.Screen 
+                name="Question1" 
+                component={Question1}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerShown:false,
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                    
+                }}
+            />
+
+            <Stack.Screen 
+                name="Question2" 
+                component={Question2}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerShown:false,
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                    
+                }}
+            /> 
+
+            <Stack.Screen 
+                name="FinishedEvaluate" 
+                component={FinishedEvaluate}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerShown:false,
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                    
+                }}
+            /> 
+
         </Stack.Navigator>
     );
 }
