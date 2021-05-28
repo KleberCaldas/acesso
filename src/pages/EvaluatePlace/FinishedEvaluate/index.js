@@ -43,7 +43,7 @@ export default function FinishedEvaluate({route}){
         return(
             <View>
                 <Dialog.Container visible = {visible}>
-                 <Dialog.Title>{"Avaliação concluída"}</Dialog.Title>
+                    <Dialog.Title>{"Avaliação concluída"}</Dialog.Title>
                     <Dialog.Description>
                         {"Agradecemos pelo seu feedback :)"}
                     </Dialog.Description>

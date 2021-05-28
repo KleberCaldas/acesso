@@ -35,10 +35,9 @@ export default function Question2({route}){
     const handleContinue = () =>{
         evaluate_grade.push(grade);
         index += 1;
-        //navigation.navigate('Question3', {questions, index, len, evaluate_grade})
-        //alert(evaluate_grade + "  --- " + index);
         navigation.navigate('FinishedEvaluate', {placeId, evaluate_grade});
         setVisible(false);
+        
     };
 
         return(

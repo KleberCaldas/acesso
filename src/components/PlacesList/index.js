@@ -13,7 +13,7 @@ export default function PlacesList({data}){
             for(let i in grade){
                 sum += grade[i]
             }
-            return sum/n;
+            return (sum/n).toFixed(1);
         }
         catch(error){
             return "N/A";

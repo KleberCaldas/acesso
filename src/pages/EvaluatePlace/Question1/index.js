@@ -9,7 +9,7 @@ export default function Question1({route}){
     const navigation = useNavigation();
     const [placeId] = useState(route.params.placeId);
     let [evaluate_grade] = useState(route.params.evaluate_grade);
-    let [index] = useState(route.params.index);
+    var [index] = useState(route.params.index);
     let [questions] = useState(route.params.questions_type_1);
     let [len] = useState(route.params.len);
     let grade = 3; //initial rating in star
@@ -18,7 +18,6 @@ export default function Question1({route}){
     const [visible, setVisible] = useState(true);
     
     function ratingCompleted(rating) {
-        console.log("Rating is: " + rating);
         grade = rating;
     }
 
@@ -35,7 +34,7 @@ export default function Question1({route}){
         evaluate_grade.push(grade);
         index += 1;
         navigation.navigate('Question2', {placeId, questions, index, len, evaluate_grade})
-        setVisible(false);
+
     };
 
         return(

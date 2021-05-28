@@ -7,7 +7,11 @@ export default function EvaluatePlace({route}){
     const [placeId] = useState(route.params.docId);
 
     let evaluate_grade =[];
-    let questions_type_1 = ["Qual foi sua experiência com rampas, corrimões ?", "Qual foi sua experiência com informações PCD?"];
+    let questions_type_1 = ["Qual foi sua experiência com rampas, corrimões, portas, elevadores ou escadas?"
+                        , "Qual foi sua experiência em locais PCD reservados?"
+                        , "Qual foi sua experiência com banheiros, provadores?"
+                        , "Qual foi sua experiência com equipamentos (bebedouros, balcões)?"
+                        , "Qual foi sua experiência com informações (placas, sinalizações)?"];
     let index = 0;
     let len = questions_type_1.length;
 
