@@ -13,6 +13,9 @@ import EvaluatePlace from '../pages/EvaluatePlace';
 import Maps from '../pages/Maps';
 import Question1 from '../pages/EvaluatePlace/Question1';
 import Question2 from '../pages/EvaluatePlace/Question2';
+import Question3 from '../pages/EvaluatePlace/Question3';
+import Question4 from '../pages/EvaluatePlace/Question4';
+import Question5 from '../pages/EvaluatePlace/Question5';
 import FinishedEvaluate from '../pages/EvaluatePlace/FinishedEvaluate';
 
 const Tab = createBottomTabNavigator();
@@ -102,7 +105,46 @@ function StackScreen(){ //manager pages in stack
                     }
                     
                 }}
+            />
+
+            <Stack.Screen 
+                name="Question3" 
+                component={Question3}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerShown:false,
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                    
+                }}
             /> 
+
+            <Stack.Screen 
+                name="Question4" 
+                component={Question4}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerShown:false,
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                    
+                }}
+            />
+
+            <Stack.Screen 
+                name="Question5" 
+                component={Question5}
+                options ={{
+                    headerTintColor: '#FFF',
+                    headerShown:false,
+                    headerStyle: {
+                        backgroundColor: '#bdb76b'
+                    }
+                    
+                }}
+            />
 
             <Stack.Screen 
                 name="FinishedEvaluate" 

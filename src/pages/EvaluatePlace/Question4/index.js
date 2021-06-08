@@ -4,7 +4,7 @@ import Dialog from 'react-native-dialog';
 import {AirbnbRating} from 'react-native-ratings';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Question2({route}){
+export default function Question4({route}){
     
     const navigation = useNavigation();
 
@@ -35,7 +35,7 @@ export default function Question2({route}){
     const handleContinue = () =>{
         evaluate_grade.push(grade);
         index += 1;
-        navigation.navigate('Question3', {placeId, questions, index, len, evaluate_grade});
+        navigation.navigate('Question5', {placeId, questions, index, len, evaluate_grade});
         setVisible(false);
         
     };
