@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { Container, OpenGoogleMapsButton, ButtonText, EvaluateButton, ContainerButton, ImageAvatar,
-     Title, Address} from './styles';
+    Title, Address, ContainerInfo, ContainerAccessbility, Scroll, TextFinalGrade, PhoneButton,
+    PhoneText, CategoryText} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import { Text } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 
 export default function AboutPlace({route}){
-    
+
+    const [docId] = useState(route.params.docId);
     const [name] = useState(route.params.name);
     const [address] = useState(route.params.address);
     const [phone] = useState(route.params.phone);
@@ -13,8 +17,43 @@ export default function AboutPlace({route}){
     const [avatarUrl] = useState(route.params.avatarUrl);
     const navigation = useNavigation();
 
+    function final_grade(grade){
+        try{
+            let n = grade.length
+            let sum = 0
+            for(let i in grade){
+                sum += grade[i]
+            }
+            return (sum/n).toFixed(1);
+        }
+        catch(error){
+            return "N/A";
+        }
+    }
+
+    function cat_name(category){
+        switch(category){
+            case "restaurants":
+                return "Restaurantes";
+            case 'shopping':
+                return "Lojas";
+            case "recreation":
+                return "Lazer";
+            case "education":
+                return "Educação";
+            case "public_service":
+                return "Serviço Público";
+            case "health":
+                return "Saúde";
+        }
+    }
+
+    
+
     return(
         <Container>
+            <Scroll>
+            <ContainerInfo>
                     {
                     avatarUrl ?
                     ( //if place have image
@@ -31,20 +70,39 @@ export default function AboutPlace({route}){
 
             <Title>{name}</Title>
             <Address>{address}</Address>
-            <Address>{phone}</Address>
-            <Address>{category}</Address>
-            <Address>{grade}</Address>
+            <PhoneButton>
+                <PhoneText>{phone}</PhoneText>
+                    <Feather
+                        name = "phone-call"
+                        color = "#bdb76b"
+                        size = {20}
+                    />
+            </PhoneButton>
+            
+            <CategoryText>{cat_name(category)}</CategoryText>
+            
+            </ContainerInfo>
+            
+            <ContainerAccessbility>
+            <Text>Acessibilidade</Text>
+            <Text>Nota Geral</Text>
+            <TextFinalGrade>{final_grade(grade)}</TextFinalGrade>
+            <Text>Mobilidade Interna</Text>
+            <Text>Mobiliário</Text>
+            <Text>Banheiro</Text>
+            <Text>Informação</Text>
+            </ContainerAccessbility>
             
             <ContainerButton>
                 <OpenGoogleMapsButton>
-                    <ButtonText onPress = { ()=> navigation.navigate('Maps')}>Abrir com Googgle Maps</ButtonText>
+                    <ButtonText onPress = { ()=> navigation.navigate('Maps')}>Mapa</ButtonText>
                 </OpenGoogleMapsButton>
 
-                <EvaluateButton onPress = { ()=> navigation.navigate('EvaluatePlace')}>
+                <EvaluateButton onPress = { ()=> navigation.navigate('EvaluatePlace',  {docId: docId})}>
                     <ButtonText>Avaliar</ButtonText>
                 </EvaluateButton>
             </ContainerButton>
-        
+            </Scroll>
         </Container>
     );
 }
