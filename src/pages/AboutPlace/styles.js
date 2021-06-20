@@ -6,9 +6,10 @@ export const Container = styled.View`
 `;
 
 export const ContainerInfo = styled.View`
+    flex: 1;
     align-items: center;
     margin-top: 15px;
-    margin: 15px 3%;
+    margin: 15px 2%;
     background-color: #FFF;
     border-radius: 8px;
     box-shadow: 1px 1px 3px rgba(18, 18, 18, 0.2);
@@ -16,13 +17,13 @@ export const ContainerInfo = styled.View`
 `;
 
 export const ContainerAccessbility = styled.View`
-align-items: center;
-margin-top: 15px;
-margin: 15px 3%;
-background-color: #FFF;
-border-radius: 8px;
-box-shadow: 1px 1px 3px rgba(18, 18, 18, 0.2);
-elevation: 3;
+    align-items: center;
+    margin-top: 15px;
+    margin: 15px 3%;
+    background-color: #FFF;
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px rgba(18, 18, 18, 0.2);
+    elevation: 3;
 `;
 
 export const ContainerButton = styled.View`
@@ -69,13 +70,22 @@ export const EvaluateButton = styled.TouchableOpacity`
 
 
 export const PhoneButton = styled.TouchableOpacity`
-    margin-top: 10px;
+    margin-top: -20px;
     align-items: center;
     flex-direction: row;
     background-color: #FFF;
     width: 390px;
     height:50px;
-    border: 0.5px solid #353840;
+
+`;
+
+export const AddressButton = styled.TouchableOpacity`
+    margin: 10px 10px;
+    align-items: center;
+    flex-direction: row;
+    background-color: #FFF;
+    width: 320px;
+    height: 100px;
 `;
 
 export const Title = styled.Text`
@@ -86,17 +96,14 @@ export const Title = styled.Text`
     textAlign: center;
 `;
 
-export const Address = styled.Text`
-    margin-top: 5px;
-    font-size: 15px;
-    
-    color: #121212;
-    textAlign: center;
-`;
-
 export const PhoneText = styled.Text`
     margin-right: 80px;
     margin-left: 80px;
+    font-size: 15px;
+`;
+
+export const AddressText = styled.Text`
+    margin-right: 10px;
     font-size: 15px;
 `;
 
@@ -110,7 +117,6 @@ export const TextFinalGrade = styled.Text`
     color: #bdb76b;
     font-weight: bold;
     left: 20px; 
-
 `;
 
 export const ImageAvatar = styled.Image`

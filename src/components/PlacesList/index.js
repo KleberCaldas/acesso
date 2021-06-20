@@ -47,7 +47,7 @@ export default function PlacesList({data}){
 
             <Actions>
                 <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlace', {name: data?.name, address: data?.address, phone: data?.phone, 
-                    category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade})}>
+                    category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade, latitude: data?.latitude, longitude:data?.longitude})}>
                     <TextButtom>Mais informações</TextButtom>
                 </MoreInformationButtom>
 

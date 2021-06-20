@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { Container, OpenGoogleMapsButton, ButtonText, EvaluateButton, ContainerButton, ImageAvatar,
     Title, Address, ContainerInfo, ContainerAccessbility, Scroll, TextFinalGrade, PhoneButton,
-    PhoneText, CategoryText} from './styles';
+    PhoneText, CategoryText, AddressButton, AddressText} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import { Text } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import call from 'react-native-phone-call';
+import { showLocation } from 'react-native-map-link'
 
 export default function AboutPlace({route}){
 
@@ -16,6 +17,8 @@ export default function AboutPlace({route}){
     const [category] = useState(route.params.category);
     const [grade] = useState(route.params.grade);
     const [avatarUrl] = useState(route.params.avatarUrl);
+    const [latitude] = useState(route.params.latitude);
+    const [longitude] = useState(route.params.longitude);
     const navigation = useNavigation();
 
     function final_grade(grade){
@@ -57,7 +60,25 @@ export default function AboutPlace({route}){
         call(args).catch(console.error);
     }
 
-    
+    function openMaps(lat, long, name){
+        showLocation({
+            latitude: -22.6731915, //pegar a latitude do usuario
+            longitude: -43.2621732, //pegar longitude do usuario
+            sourceLatitude: lat,  // optionally specify starting location for directions
+            sourceLongitude: long,  // not optional if sourceLatitude is specified
+            title: name,  // optional
+            googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
+            //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
+            alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+            dialogTitle: 'This is the dialog Title', // optional (default: 'Open in Maps')
+            dialogMessage: 'This is the amazing dialog Message', // optional (default: 'What app would you like to use?')
+            cancelText: 'This is the cancel button text', // optional (default: 'Cancel')
+            appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
+            naverCallerName: 'com.example.myapp' // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
+            // appTitles: { 'google-maps': 'My custom Google Maps title' } // optionally you can override default app titles
+            // app: 'uber'  // optionally specify specific app to use
+        })
+    }
 
     return(
         <Container>
@@ -78,7 +99,15 @@ export default function AboutPlace({route}){
                 }
 
             <Title>{name}</Title>
-            <Address>{address}</Address>
+            <AddressButton onPress = {()=> openMaps(latitude,longitude,name)}>
+            <AddressText>{address}</AddressText>
+                    <Feather
+                        name = "map-pin"
+                        color = "#bdb76b"
+                        size = {20}
+                    />
+            </AddressButton>
+
             <PhoneButton onPress = {() => call_phone(phone)}>
                 <PhoneText>{phone}</PhoneText>
                     <Feather
@@ -103,9 +132,6 @@ export default function AboutPlace({route}){
             </ContainerAccessbility>
             
             <ContainerButton>
-                <OpenGoogleMapsButton>
-                    <ButtonText onPress = { ()=> navigation.navigate('Maps')}>Mapa</ButtonText>
-                </OpenGoogleMapsButton>
 
                 <EvaluateButton onPress = { ()=> navigation.navigate('EvaluatePlace',  {docId: docId})}>
                     <ButtonText>Avaliar</ButtonText>

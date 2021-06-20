@@ -27,6 +27,7 @@
     "react-native-dialog": "^6.2.0",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-image-picker": "^2.3.3",
+    "react-native-map-link": "^2.7.27",
     "react-native-phone-call": "^1.0.9",
     "react-native-ratings": "^7.6.1",
     "react-native-reanimated": "^1.13.2",
