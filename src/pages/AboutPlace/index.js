@@ -5,6 +5,7 @@ import { Container, OpenGoogleMapsButton, ButtonText, EvaluateButton, ContainerB
 import {useNavigation} from '@react-navigation/native';
 import { Text } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
+import call from 'react-native-phone-call';
 
 export default function AboutPlace({route}){
 
@@ -48,6 +49,14 @@ export default function AboutPlace({route}){
         }
     }
 
+    function call_phone(phone_number){
+        const args = {
+            number: phone_number,
+            prompt: false
+        }
+        call(args).catch(console.error);
+    }
+
     
 
     return(
@@ -70,7 +79,7 @@ export default function AboutPlace({route}){
 
             <Title>{name}</Title>
             <Address>{address}</Address>
-            <PhoneButton>
+            <PhoneButton onPress = {() => call_phone(phone)}>
                 <PhoneText>{phone}</PhoneText>
                     <Feather
                         name = "phone-call"
