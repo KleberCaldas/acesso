@@ -6,7 +6,8 @@ import {useNavigation} from '@react-navigation/native';
 import { Text } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import call from 'react-native-phone-call';
-import { showLocation } from 'react-native-map-link'
+import { showLocation } from 'react-native-map-link';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function AboutPlace({route}){
 
@@ -20,6 +21,8 @@ export default function AboutPlace({route}){
     const [latitude] = useState(route.params.latitude);
     const [longitude] = useState(route.params.longitude);
     const navigation = useNavigation();
+    const [latitudeUser, setLatitudeUser] = useState('');
+    const [longitudeUser, setLongitudeUser] = useState('');
 
     function final_grade(grade){
         try{
@@ -60,12 +63,15 @@ export default function AboutPlace({route}){
         call(args).catch(console.error);
     }
 
-    function openMaps(lat, long, name){
+    function openMaps(latitudeUser, longitudeUser, latitude, longitude, name){
+
+        getLocation();
+
         showLocation({
-            latitude: -22.6731915, //pegar a latitude do usuario
-            longitude: -43.2621732, //pegar longitude do usuario
-            sourceLatitude: lat,  // optionally specify starting location for directions
-            sourceLongitude: long,  // not optional if sourceLatitude is specified
+            latitude: latitude, //latitude from place
+            longitude: longitude, // longitude from place
+            sourceLatitude: latitudeUser,  // optionally specify starting location for directions
+            sourceLongitude: longitudeUser,  // not optional if sourceLatitude is specified
             title: name,  // optional
             googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
             //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
@@ -78,6 +84,19 @@ export default function AboutPlace({route}){
             // appTitles: { 'google-maps': 'My custom Google Maps title' } // optionally you can override default app titles
             // app: 'uber'  // optionally specify specific app to use
         })
+    }
+
+    const getLocation = () => {
+        Geolocation.getCurrentPosition(
+        (position) => {
+            const lat = JSON.stringify(position.coords.latitude);
+            const long = JSON.stringify(position.coords.longitude);
+            setLatitudeUser(lat);
+            setLongitudeUser(long);
+        },
+            (error) => alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
     }
 
     return(
@@ -99,7 +118,7 @@ export default function AboutPlace({route}){
                 }
 
             <Title>{name}</Title>
-            <AddressButton onPress = {()=> openMaps(latitude,longitude,name)}>
+            <AddressButton onPress = {()=> openMaps(latitudeUser,longitudeUser, latitude, longitude,name)}>
             <AddressText>{address}</AddressText>
                     <Feather
                         name = "map-pin"
