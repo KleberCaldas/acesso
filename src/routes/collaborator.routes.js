@@ -204,6 +204,17 @@ function CollaboratorRoutes(){
                     }
                 }}
             />
+
+            <Tab.Screen 
+                //name = "Search"
+                name = "Mapa" 
+                component={Maps}
+                options ={{
+                    tabBarIcon :({ color, size}) => {
+                        return <Feather name = "map" color = {color} size = {size} />
+                    }
+                }}
+            />
             
             <Tab.Screen 
                 //name = "Profile"
