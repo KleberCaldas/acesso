@@ -25,7 +25,6 @@ export default class Maps extends Component {
                 longitudeDelta:0.0421
             }
         });
-        console.log('oi')
         },
         (error)=>{ 
             console.log(error.code, error.message)
@@ -44,7 +43,7 @@ export default class Maps extends Component {
         <View style={styles.container}>
   
           <MapView
-            minZoomLevel={3}
+            minZoomLevel={15}
             style={styles.maps}
             region={region}
             showsUserLocation
