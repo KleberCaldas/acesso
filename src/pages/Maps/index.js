@@ -1,8 +1,9 @@
 import React, {Component, useState} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import {StyleSheet, Text, View, Image} from 'react-native';
+import MapView, {Marker, Callout} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import firestore from '@react-native-firebase/firestore';
+import { backgroundColor } from '@shopify/restyle';
 
 
 
@@ -13,6 +14,20 @@ export default class Maps extends Component {
             region:null,
             markers:[],
         };
+    }
+
+    final_grade(grade){
+        try{
+            let n = grade.length
+            let sum = 0
+            for(let i in grade){
+                sum += grade[i]
+            }
+            return (sum/n).toFixed(1);
+        }
+        catch(error){
+            return "N/A";
+        }
     }
 
     async componentDidMount(){
@@ -71,11 +86,39 @@ export default class Maps extends Component {
                 
                     markers.map((markers) => {
                         return(
-                            <Marker 
+                            <Marker style={styles.marker} 
                                 coordinate = {{latitude: parseFloat(markers.latitude), longitude: parseFloat(markers.longitude)}} 
-                                pinColor={'#FF0000'}
+                                image = {require('../../images/wheelchair.png')}
                                 title = {markers.name}
-                            />
+                                description = {markers.address}
+                            >
+                                <Callout tootip>
+                                    <View>
+                                        <View style={styles.containerCallout}>
+                                            <View style={styles.containerTitleImage}>
+                                                {
+                                                    markers.avatarUrl ?
+                                                    ( //if place have image
+                                                        <Image style={styles.image}
+                                                            source={{uri:markers.avatarUrl}}
+                                                        />
+                                                    ):
+                                                    (
+                                                        <Image style={styles.image}
+                                                            source = {require('../../images/location_pin.png')}
+                                                        />
+                                                    )
+                                                }
+                                                <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
+                                            </View>
+                                            <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                            <View style={styles.arrowBorder}/>
+                                            <View style={styles.arrow}/>
+                                        </View>
+                                    </View>
+                                </Callout>
+                            </Marker>
+
                         );
                     })
                 }
@@ -93,9 +136,65 @@ export default class Maps extends Component {
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
         },
+        containerCallout:{
+            flexDirection:'column',
+            alignSelf: 'flex-start',
+            alignItems: 'center',
+            backgroundColor: '#fff',
+            borderColor: '#ccc',
+            padding: 15,
+            width: 250,
+        },
+
+        containerTitleImage:{
+            flexDirection:'row',
+        },
+
+        arrow:{
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+            borderTopColor: '#fff',
+            borderWidth: 16,
+            alignSelf: 'center',
+            marginTop: -32,
+        },
+
+        arrowBorder:{
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+            borderTopColor: '#007a87',
+            borderWidth: 16,
+            alignSelf: 'center',
+            marginTop: -0.5,
+        },
+
+        grade:{
+            fontSize: 20,
+            fontWeight: 'bold',
+            color: '#bdb76b',
+            
+        },
+
+        name:{
+            fontSize: 15,
+            fontWeight:'bold',
+            marginBottom: 5,
+            right: 30,
+            padding: -30,
+        },
+
+        image:{
+            width: "100%",
+            height: 80,
+            borderRadius: 10,
+        },
+
         maps:{
         width:'100%',
         height:'100%',
         marginTop: 15
+        },
+        marker:{
+            fontSize:30,
         }
 });
