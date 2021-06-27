@@ -85,32 +85,18 @@ export default class Maps extends Component {
                 {
                 
                     markers.map((markers) => {
+                        if(this.final_grade(markers.grade) >= 4){
                         return(
                             <Marker style={styles.marker} 
                                 coordinate = {{latitude: parseFloat(markers.latitude), longitude: parseFloat(markers.longitude)}} 
-                                image = {require('../../images/wheelchair.png')}
+                                image = {require('../../images/wheelchair_green.png')}
                                 title = {markers.name}
                                 description = {markers.address}
                             >
                                 <Callout tootip>
                                     <View>
                                         <View style={styles.containerCallout}>
-                                            <View style={styles.containerTitleImage}>
-                                                {
-                                                    markers.avatarUrl ?
-                                                    ( //if place have image
-                                                        <Image style={styles.image}
-                                                            source={{uri:markers.avatarUrl}}
-                                                        />
-                                                    ):
-                                                    (
-                                                        <Image style={styles.image}
-                                                            source = {require('../../images/location_pin.png')}
-                                                        />
-                                                    )
-                                                }
-                                                <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
-                                            </View>
+                                            <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
                                             <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
                                             <View style={styles.arrowBorder}/>
                                             <View style={styles.arrow}/>
@@ -118,8 +104,69 @@ export default class Maps extends Component {
                                     </View>
                                 </Callout>
                             </Marker>
+                        );}
+                        else if(this.final_grade(markers.grade) >= 3){
+                            return(
+                                <Marker style={styles.marker} 
+                                    coordinate = {{latitude: parseFloat(markers.latitude), longitude: parseFloat(markers.longitude)}} 
+                                    image = {require('../../images/wheelchair_yellow.png')}
+                                    title = {markers.name}
+                                    description = {markers.address}
+                                >
+                                    <Callout tootip>
+                                        <View>
+                                            <View style={styles.containerCallout}>
+                                                <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
+                                                <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                                <View style={styles.arrowBorder}/>
+                                                <View style={styles.arrow}/>
+                                            </View>
+                                        </View>
+                                    </Callout>
+                                </Marker>
+                        );}
 
-                        );
+                        else if(this.final_grade(markers.grade) < 3){
+                            return(
+                                <Marker style={styles.marker} 
+                                    coordinate = {{latitude: parseFloat(markers.latitude), longitude: parseFloat(markers.longitude)}} 
+                                    image = {require('../../images/wheelchair_red.png')}
+                                    title = {markers.name}
+                                    description = {markers.address}
+                                >
+                                    <Callout tootip>
+                                        <View>
+                                            <View style={styles.containerCallout}>
+                                                <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
+                                                <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                                <View style={styles.arrowBorder}/>
+                                                <View style={styles.arrow}/>
+                                            </View>
+                                        </View>
+                                    </Callout>
+                                </Marker>
+                            );}
+                        else{
+                                return(
+                                    <Marker style={styles.marker} 
+                                        coordinate = {{latitude: parseFloat(markers.latitude), longitude: parseFloat(markers.longitude)}} 
+                                        image = {require('../../images/wheelchair_gray.png')}
+                                        title = {markers.name}
+                                        description = {markers.address}
+                                    >
+                                        <Callout tootip>
+                                            <View>
+                                                <View style={styles.containerCallout}>
+                                                    <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
+                                                    <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                                    <View style={styles.arrowBorder}/>
+                                                    <View style={styles.arrow}/>
+                                                </View>
+                                            </View>
+                                        </Callout>
+                                    </Marker>
+                            );}    
+                        
                     })
                 }
             </MapView>
@@ -179,8 +226,9 @@ export default class Maps extends Component {
             fontSize: 15,
             fontWeight:'bold',
             marginBottom: 5,
-            right: 30,
-            padding: -30,
+            padding: 10,
+            textAlign: 'center',
+            
         },
 
         image:{
