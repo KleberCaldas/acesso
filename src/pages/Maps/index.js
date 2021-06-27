@@ -1,9 +1,9 @@
 import React, {Component, useState} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import firestore from '@react-native-firebase/firestore';
-import { backgroundColor } from '@shopify/restyle';
+import Feather from 'react-native-vector-icons/Feather';
 
 
 
@@ -93,7 +93,7 @@ export default class Maps extends Component {
                                 title = {markers.name}
                                 description = {markers.address}
                             >
-                                <Callout tootip>
+                                <Callout onPress={()=>alert('O que deseja fazer?')}>
                                     <View>
                                         <View style={styles.containerCallout}>
                                             <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
