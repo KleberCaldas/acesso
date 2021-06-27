@@ -173,7 +173,7 @@ export default function NewPlace(){
                         <Picker.item key={3} value={'recreation'} label ="Lazer" />
                         <Picker.item key={4} value={'education'} label ="Educação" />
                         <Picker.item key={5} value={'public_service'} label ="Serviço Público" />
-                        <Picker.item key={2} value={'health'} label ="Saúde" />
+                        <Picker.item key={6} value={'health'} label ="Saúde" />
                     </PickerChoice>
                 </ViewPicker>
                 

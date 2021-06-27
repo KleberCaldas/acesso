@@ -1,7 +1,8 @@
 import React, {useState, useContext} from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
-import {Container, Title, Input, Button, ButtonText, SignUpButton, SignUpText} from './styles'; 
-
+import {View, Text, ActivityIndicator, Alert} from 'react-native';
+import {Container, Title, Input, Button, ButtonText, SignUpButton, SignUpText, ViewPicker,
+        PickerChoice} from './styles'; 
+import {Picker} from '@react-native-picker/picker';
 import { AuthContext } from '../../contexts/auth'
 
 export default function Login(){
@@ -10,10 +11,24 @@ export default function Login(){
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [disability, setdisability] = useState('');
 
     const {signUp, signIn, loadingAuth} = useContext(AuthContext)
 
     // Functions 
+
+    function showAlert(msg){
+        Alert.alert(
+            "Ops! Ocorreu um erro",
+            msg,
+            [
+                {
+                    text: "Ok",
+                    style: "default",
+                },
+            ]
+        )
+    }
 
     function toggleLogin(){
         setLogin(!login);
@@ -25,21 +40,28 @@ export default function Login(){
     function handleLogin(){
         
         if (email === '' || password === ''){
-            alert('Preencha todos os dados')
+            let msg = "Por favor, preencha todos os dados corretamente."
+            showAlert(msg);
             return;
         }
-        
-        signIn(email, password);
+        try{
+            signIn(email, password);
+        }
+        catch(error){
+            let msg = "Senha ou usuário incorretos, por favor, tente novamente."
+            showAlert(msg);
+        }
     }
     
     function handleSingUp(){
         if (email === '' || password === '' || name === ''){
-            alert('Preencha todos os dados')
+            let msg = "Por favor, preencha todos os dados corretamente."
+            showAlert(msg);
             return;
         }
         
         //add user
-        signUp(email, password, name);
+        signUp(email, password, name, disability);
     }
 
     if(login){
@@ -102,7 +124,17 @@ export default function Login(){
                 onChangeText = { (text) => setPassword(text)} 
             />
 
-
+            <ViewPicker>
+                <PickerChoice selectedValue = {disability}
+                    onValueChange = {(text) => setdisability(text)
+                    }>
+                    <Picker.item key={1} value={'reduced_mobility'} label ="Mobilidade Reduzida" />
+                    <Picker.item key={2} value={'visual_impairment'} label ="Visual" />
+                    <Picker.item key={3} value={'hearing_deficiency'} label ="Auditiva" />
+                    <Picker.item key={4} value={'intellectual_disability'} label ="Intelectual" />
+                </PickerChoice>
+            </ViewPicker>
+            
             <Button onPress = {handleSingUp}>
             {
                     loadingAuth ? (

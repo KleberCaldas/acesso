@@ -46,3 +46,17 @@ export const SignUpText = styled.Text`
     color: #bdb76b;
     font-size: 18px;
 `;
+
+export const ViewPicker = styled.View`
+    width: 80%;
+    padding: 10px;
+    background-color: #EEE;
+    margin-top: 10px;
+    border-radius: 7px;
+    font-size: 17px;
+`;
+
+export const PickerChoice = styled.Picker`
+    color: #808080;
+    
+`;

@@ -1,6 +1,7 @@
 //Rules about login, register users
 
 import React, {useState, createContext, useEffect} from 'react';
+import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -27,6 +28,19 @@ function AuthProvider({children}){
         loadStorage();
     }, []);
 
+    function showAlert(msg){
+        Alert.alert(
+            "Ops! Ocorreu um erro",
+            msg,
+            [
+                {
+                    text: "Ok",
+                    style: "default",
+                },
+            ]
+        )
+    }
+
 
     async function signIn(email, password){
         setLoadingAuth(true);
@@ -47,6 +61,7 @@ function AuthProvider({children}){
                 name: userProfile.data().name,
                 email: value.user.email,
                 category: userProfile.data().category,
+                disability: userProfile.data().disability,
             };
 
             setUser(data);
@@ -54,12 +69,13 @@ function AuthProvider({children}){
             setLoading(false);
         })
         .catch((error) => {
-            console.log(error);
+            let msg = "Senha ou usuário incorretos, por favor, tente novamente."
+            showAlert(msg);
             setLoadingAuth(false);
         })
     }
 
-    async function signUp(email, password, name){
+    async function signUp(email, password, name, disability){
         setLoadingAuth(true);
         
         await auth().createUserWithEmailAndPassword(email, password)
@@ -69,13 +85,16 @@ function AuthProvider({children}){
             .doc(uid).set({
                 name: name,
                 category: "collaborator",
+                email: email,
+                disability: disability
             })
             .then(() => {
                 let data = {
                     uid: uid,
                     name: name,
                     email: value.user.email,
-                    category: value.user.category
+                    category: value.user.category,
+                    disability: value.user.disability
                 };
 
             setUser(data);
