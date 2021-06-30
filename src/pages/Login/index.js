@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {View, Text, ActivityIndicator, Alert} from 'react-native';
 import {Container, Title, Input, Button, ButtonText, SignUpButton, SignUpText, ViewPicker,
-        PickerChoice} from './styles'; 
+        PickerChoice, ImageAcesso} from './styles'; 
 import {Picker} from '@react-native-picker/picker';
 import { AuthContext } from '../../contexts/auth'
 
@@ -67,37 +67,40 @@ export default function Login(){
     if(login){
         return(
             <Container>
+
+                <ImageAcesso source={require('../../images/symbol_accessibility.png')}/>
+
                 <Title>
                     ACESSO
                 </Title>
             
-            <Input
-                placeholder = "seuemail@email.com"
-                value = {email}
-                onChangeText = { (text) => setEmail(text)}
-            />
+                <Input
+                    placeholder = "seuemail@email.com"
+                    value = {email}
+                    onChangeText = { (text) => setEmail(text)}
+                />
 
-            <Input
-                placeholder = "********"
-                secureTextEntry = {true}
-                value = {password}
-                onChangeText = { (text) => setPassword(text)} 
-            />
+                <Input
+                    placeholder = "********"
+                    secureTextEntry = {true}
+                    value = {password}
+                    onChangeText = { (text) => setPassword(text)} 
+                />
 
-            <Button onPress = {handleLogin}>
-                {
-                    loadingAuth ? (
-                        <ActivityIndicator size={20} color="#bdb76b"/>
-                    ) : (
-                        <ButtonText>Entrar</ButtonText>
-                    )
-                }
-                
-            </Button>
+                <Button onPress = {handleLogin}>
+                    {
+                        loadingAuth ? (
+                            <ActivityIndicator size={20} color="#bdb76b"/>
+                        ) : (
+                            <ButtonText>Entrar</ButtonText>
+                        )
+                    }
+                    
+                </Button>
 
-            <SignUpButton onPress={() => toggleLogin()}>
-                <SignUpText>Criar uma conta</SignUpText>
-            </SignUpButton>
+                <SignUpButton onPress={() => toggleLogin()}>
+                    <SignUpText>Criar uma conta</SignUpText>
+                </SignUpButton>
             </Container>
         )
     }
