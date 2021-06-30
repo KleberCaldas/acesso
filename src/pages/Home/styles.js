@@ -2,12 +2,13 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
     flex:1;
+    align-items:center;
 `;
 
 export const ButtonMenu = styled.TouchableOpacity`
-    width: 150px;
-    height: 150px;
-    border-radius: 9px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
     justify-content: center;
     align-items: center;
     text-alignVertical: center;
@@ -20,12 +21,22 @@ export const ButtonMenu = styled.TouchableOpacity`
     
 
 export const ButtonText = styled.Text`
-    font-size: 25px;
+    font-size: 15px;
     color: #FFF;
     textAlign: center;
 `;
 
+export const Scroll = styled.ScrollView`
+    
+`;
+
 export const ViewBtn = styled.View`
-    flexDirection: row;
-    justify-content: center;
+    flex-direction:row;
+    flex: 1;
+    align-items: center;
+`;
+
+export const ImageBtn = styled.Image`
+    width: 35px;
+    height: 35px;
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, ButtonMenu, ButtonText, ViewBtn} from './styles';
+import {Container, ImageBtn, ButtonMenu, ButtonText, ViewBtn, Scroll} from './styles';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -10,36 +10,39 @@ export default function Home(){
     return(
     
         <Container>
-            <ViewBtn>
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Restaurantes'})}>
-                    <ButtonText>Restaurantes</ButtonText>
-                </ButtonMenu>
+            <Scroll horizontal = {true}>
+                
+                    <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Restaurantes'})}>
+                        <ImageBtn source={require('../../images/restaurant.png')}/>
+                        <ButtonText>Restaurantes</ButtonText>
+                    </ButtonMenu>
 
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Compras'})}>
-                    <ButtonText>Compras</ButtonText>
-                </ButtonMenu>
-            </ViewBtn>
+                    <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Compras'})}>
+                        <ImageBtn source={require('../../images/shopping.png')}/>
+                        <ButtonText>Compras</ButtonText>
+                    </ButtonMenu>
 
-            <ViewBtn>
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Lazer'})}>
-                    <ButtonText>Lazer</ButtonText>
-                </ButtonMenu>
+                    <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Lazer'})}>
+                        <ImageBtn source={require('../../images/recreation.png')}/>
+                        <ButtonText>Lazer</ButtonText>
+                    </ButtonMenu>
 
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Educação'})}>
-                    <ButtonText>Educação</ButtonText>
-                </ButtonMenu>
-            </ViewBtn>
+                    <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Educação'})}>
+                        <ImageBtn source={require('../../images/education.png')}/>
+                        <ButtonText>Educação</ButtonText>
+                    </ButtonMenu>
 
-            <ViewBtn>
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Serviço Público'})}>
-                    <ButtonText>Serviço Público</ButtonText>
-                </ButtonMenu>
+                    <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Serviço Público'})}>
+                        <ImageBtn source={require('../../images/public_service.png')}/>
+                        <ButtonText>Serviço Público</ButtonText>
+                    </ButtonMenu>
 
-                <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Saúde'})}>
-                    <ButtonText>Saúde</ButtonText>
-                </ButtonMenu>
-            </ViewBtn>
-
-            </Container>
+                    <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Saúde'})}>
+                        <ImageBtn source={require('../../images/health.png')}/>
+                        <ButtonText>Saúde</ButtonText>
+                    </ButtonMenu>
+                
+            </Scroll>
+        </Container>
     );
 }
