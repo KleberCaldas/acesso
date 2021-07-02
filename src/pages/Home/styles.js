@@ -19,7 +19,6 @@ export const ButtonMenu = styled.TouchableOpacity`
     background-color: #bdb76b;
     margin-top: 20px;
 `;
-    
 
 export const ButtonText = styled.Text`
     font-size: 15px;

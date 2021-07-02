@@ -72,33 +72,33 @@ export default function Login(){
                     ACESSO
                 </Title>
             
-            <Input
-                placeholder = "seuemail@email.com"
-                value = {email}
-                onChangeText = { (text) => setEmail(text)}
-            />
+                <Input
+                    placeholder = "seuemail@email.com"
+                    value = {email}
+                    onChangeText = { (text) => setEmail(text)}
+                />
 
-            <Input
-                placeholder = "********"
-                secureTextEntry = {true}
-                value = {password}
-                onChangeText = { (text) => setPassword(text)} 
-            />
+                <Input
+                    placeholder = "********"
+                    secureTextEntry = {true}
+                    value = {password}
+                    onChangeText = { (text) => setPassword(text)} 
+                />
 
-            <Button onPress = {handleLogin}>
-                {
-                    loadingAuth ? (
-                        <ActivityIndicator size={20} color="#bdb76b"/>
-                    ) : (
-                        <ButtonText>Entrar</ButtonText>
-                    )
-                }
-                
-            </Button>
+                <Button onPress = {handleLogin}>
+                    {
+                        loadingAuth ? (
+                            <ActivityIndicator size={20} color="#bdb76b"/>
+                        ) : (
+                            <ButtonText>Entrar</ButtonText>
+                        )
+                    }
+                    
+                </Button>
 
-            <SignUpButton onPress={() => toggleLogin()}>
-                <SignUpText>Criar uma conta</SignUpText>
-            </SignUpButton>
+                <SignUpButton onPress={() => toggleLogin()}>
+                    <SignUpText>Criar uma conta</SignUpText>
+                </SignUpButton>
             </Container>
         )
     }

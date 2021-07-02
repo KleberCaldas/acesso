@@ -11,7 +11,11 @@ export default function Home(){
     return(
     
         <Container>
+<<<<<<< HEAD
                 <Scroll horizontal = {true} showHorizontalScrollIndicator = {false}>
+=======
+            <Scroll horizontal = {true} showHorizontalScrollIndicator = {false}>
+>>>>>>> 37078903a7f8d8c0790f4582eb997ed4aa1699c7
                 
                     <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Restaurantes'})}>
                         <ImageBtn source={require('../../images/restaurant.png')}/>
@@ -42,7 +46,6 @@ export default function Home(){
                         <ImageBtn source={require('../../images/health.png')}/>
                         <ButtonText>Saúde</ButtonText>
                     </ButtonMenu>
-                
             </Scroll>
 
             <ViewPlaceList>
