@@ -1,5 +1,6 @@
 import React from 'react';
-import {Container, ImageBtn, ButtonMenu, ButtonText, ViewBtn, Scroll} from './styles';
+import {Container, ImageBtn, ButtonMenu, 
+    ButtonText, Text,ViewPlaceList, Scroll} from './styles';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -10,7 +11,7 @@ export default function Home(){
     return(
     
         <Container>
-            <Scroll horizontal = {true}>
+                <Scroll horizontal = {true} showHorizontalScrollIndicator = {false}>
                 
                     <ButtonMenu onPress = {()=> navigation.navigate('PlaceList', {category: 'Restaurantes'})}>
                         <ImageBtn source={require('../../images/restaurant.png')}/>
@@ -43,6 +44,51 @@ export default function Home(){
                     </ButtonMenu>
                 
             </Scroll>
+
+            <ViewPlaceList>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+                <Text>Aqui vai ficar o placelist
+                        ordenado por proximidade
+                </Text>
+            </ViewPlaceList>
         </Container>
     );
 }

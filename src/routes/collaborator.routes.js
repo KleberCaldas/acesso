@@ -17,6 +17,7 @@ import Question3 from '../pages/EvaluatePlace/Question3';
 import Question4 from '../pages/EvaluatePlace/Question4';
 import Question5 from '../pages/EvaluatePlace/Question5';
 import FinishedEvaluate from '../pages/EvaluatePlace/FinishedEvaluate';
+import Statistic from '../pages/Statistic';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -223,6 +224,16 @@ function CollaboratorRoutes(){
                 options ={{
                     tabBarIcon :({ color, size}) => {
                         return <Feather name = "user" color = {color} size = {size} />
+                    }
+                }}
+            />
+
+            <Tab.Screen 
+                name = "Estatística" 
+                component={Statistic}
+                options ={{
+                    tabBarIcon :({ color, size}) => {
+                        return <Feather name = "pie-chart" color = {color} size = {size} />
                     }
                 }}
             />

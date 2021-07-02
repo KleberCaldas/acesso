@@ -60,3 +60,8 @@ export const PickerChoice = styled.Picker`
     color: #808080;
     
 `;
+
+export const ImageAcesso = styled.Image`
+    width: 100px;
+    height: 100px;
+`;

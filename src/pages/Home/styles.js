@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     flex:1;
     align-items:center;
+    flex-direction: column;
 `;
 
 export const ButtonMenu = styled.TouchableOpacity`
@@ -12,11 +13,11 @@ export const ButtonMenu = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     text-alignVertical: center;
-    margin-top: 30px;
-    margin-left: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
     margin-right: 20px;
     background-color: #bdb76b;
-    
+    margin-top: 20px;
 `;
     
 
@@ -27,16 +28,18 @@ export const ButtonText = styled.Text`
 `;
 
 export const Scroll = styled.ScrollView`
-    
+    flex:0.3;
 `;
 
-export const ViewBtn = styled.View`
-    flex-direction:row;
+export const ViewPlaceList = styled.View`
+    flex-direction:column;
     flex: 1;
-    align-items: center;
 `;
 
 export const ImageBtn = styled.Image`
     width: 35px;
     height: 35px;
+    `;
+
+export const Text = styled.Text`
 `;
