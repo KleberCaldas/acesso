@@ -42,3 +42,8 @@ export const ImageBtn = styled.Image`
 
 export const Text = styled.Text`
 `;
+
+export const ListPlace = styled.FlatList`
+    flex: 1;
+    
+`;
