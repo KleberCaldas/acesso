@@ -2,29 +2,20 @@ import React, {useState, useLayoutEffect, useContext} from 'react';
 import {Container, ImageBtn, ButtonMenu, 
         ButtonText, Text,ViewPlaceList, Scroll} from './styles';
 import { useNavigation } from '@react-navigation/native';
-import haversine from 'haversine-distance';
 import {View, ActivityIndicator} from 'react-native';
 import {ListPlace } from '../PlaceList/styles';
 import firestore from '@react-native-firebase/firestore';
 import { AuthContext } from '../../contexts/auth';
 import PlacesListHome from '../../components/PlaceListHome';
-import Geolocation from '@react-native-community/geolocation';
+
 
 export default function Home(){
 
         const navigation = useNavigation();
-        const pA = {latitude: 37.8136, longitude: 144.9631}
-        const pB = {latitude: 33.8650, longitude: 151.2094}
-        const [latitudeUser, setLatitudeUser] = useState('');
-        const [longitudeUser, setLongitudeUser] = useState('');
-        
         const [places, setPlaces] = useState([]);
         const [loading, setLoading] = useState(true);
-        const { user } = useContext(AuthContext);
         
         useLayoutEffect(() => {
-        
-                getLocation();
         // flatList
         
         const subscriber = firestore()
@@ -40,13 +31,6 @@ export default function Home(){
                         });
                 });
 
-                
-                /* Criar uma função que adicione para cada elemento do listPlace o resultado
-                da formula de haversine
-                        pUser :{latitudeUser, longitudeUser}
-                        pPlace: {latitudePlace, longitudePlace}
-                        distance: haversine(pUser, pPlace)
-                */
                 console.log(listPlace);
                 setPlaces(listPlace);
                 setLoading(false);
@@ -57,19 +41,6 @@ export default function Home(){
 
         },[navigation]);
 
-        const getLocation = () => {
-                Geolocation.getCurrentPosition(
-                (position) => {
-                        const lat = JSON.stringify(position.coords.latitude);
-                        const long = JSON.stringify(position.coords.longitude);
-                        setLatitudeUser(lat);
-                        setLongitudeUser(long);
-                },
-                (error) => alert(error.message),
-                { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-                );
-        }
-        
         return(
         
         <Container>

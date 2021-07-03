@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Container, Header, Avatar, CompanyName, ContentView, AddressText, Actions ,MoreInformationButtom, EvaluatePlaceButtom, TextButtom, Grade } from './styles';
 import {useNavigation} from '@react-navigation/native';
+import haversine from 'haversine-distance';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function PlacesListHome({data}){
     const navigation = useNavigation();
+    const [latitudeUser, setLatitudeUser] = useState('');
+    const [longitudeUser, setLongitudeUser] = useState('');
     
     function final_grade(grade){
         try{
@@ -18,6 +22,27 @@ export default function PlacesListHome({data}){
         catch(error){
             return "N/A";
         }
+    }
+
+
+    function distance(){
+        
+        Geolocation.getCurrentPosition(
+            (position) => {
+                    const lat = JSON.stringify(position.coords.latitude);
+                    const long = JSON.stringify(position.coords.longitude);
+                    setLatitudeUser(lat);
+                    setLongitudeUser(long);
+            },
+            (error) => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+            );
+
+        const pUser={latitude: latitudeUser, longitude: longitudeUser};
+        const pPlace={latitude: data.latitude, longitude: data.longitude};
+        const dist = (haversine(pUser,pPlace)/1000).toFixed(2);
+        
+        return dist;
     }
 
     return(
@@ -43,6 +68,7 @@ export default function PlacesListHome({data}){
             <ContentView>
                 <Grade>{final_grade()}</Grade>
                 <AddressText>{data?.address}</AddressText>
+                <AddressText>{distance()} Km</AddressText>
             </ContentView>
 
             <Actions>
