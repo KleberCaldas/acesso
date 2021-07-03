@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useState, useContext } from 'react';
 import {Platform} from 'react-native';
 import { Container, ButtonText, ButtonAdd, Input, UpLoadButton
     , UpLoadText, PickerChoice, View, ViewPicker,
-    ButtonGetLocation, Avatar } from './styles';
+    ButtonGetLocation, Avatar} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {AuthContext} from '../../contexts/auth';

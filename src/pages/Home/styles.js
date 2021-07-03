@@ -27,7 +27,7 @@ export const ButtonText = styled.Text`
 `;
 
 export const Scroll = styled.ScrollView`
-    flex:0.3;
+    flex: 0.22;
 `;
 
 export const ViewPlaceList = styled.View`
@@ -45,5 +45,16 @@ export const Text = styled.Text`
 
 export const ListPlace = styled.FlatList`
     flex: 1;
-    
+`;
+
+export const ButtonFilter = styled.TouchableOpacity`
+    background-color: #418cfd;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    justify-content: center
+    align-items: center;
+    position: absolute;
+    bottom: 5%
+    right: 5%; 
 `;

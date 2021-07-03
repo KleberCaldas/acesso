@@ -45,39 +45,44 @@ export default function PlacesListHome({data}){
         return dist;
     }
 
-    return(
-        <Container>
-            <Header>
-                {
-                    data.avatarUrl ?
-                    ( //if place have image
-                        <Avatar
-                            source={{uri:data.avatarUrl}}
-                        />
-                    ):
-                    (
-                        <Avatar
-                            source = {require('../../images/location_pin.png')}
-                        />
-                    )
-                }
-                
-                <CompanyName numberOfLines={3}>{data?.name}</CompanyName>
-            </Header>
-
-            <ContentView>
-                <Grade>{final_grade()}</Grade>
-                <AddressText>{data?.address}</AddressText>
-                <AddressText>{distance()} Km</AddressText>
-            </ContentView>
-
-            <Actions>
-                <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlace', {name: data?.name, address: data?.address, phone: data?.phone, 
-                    category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade, latitude: data?.latitude, longitude:data?.longitude})}>
-                    <TextButtom>Mais informações</TextButtom>
-                </MoreInformationButtom>
-            </Actions>
-        
-        </Container>
-    );
+    //if(distance() > 26.00){
+        return(
+            <Container>
+                <Header>
+                    {
+                        data.avatarUrl ?
+                        ( //if place have image
+                            <Avatar
+                                source={{uri:data.avatarUrl}}
+                            />
+                        ):
+                        (
+                            <Avatar
+                                source = {require('../../images/location_pin.png')}
+                            />
+                        )
+                    }
+                    
+                    <CompanyName numberOfLines={3}>{data?.name}</CompanyName>
+                </Header>
+    
+                <ContentView>
+                    <Grade>{final_grade()}</Grade>
+                    <AddressText>{data?.address}</AddressText>
+                    <AddressText>{distance()} Km</AddressText>
+                </ContentView>
+    
+                <Actions>
+                    <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlace', {name: data?.name, address: data?.address, phone: data?.phone, 
+                        category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade, latitude: data?.latitude, longitude:data?.longitude})}>
+                        <TextButtom>Mais informações</TextButtom>
+                    </MoreInformationButtom>
+                </Actions>
+            
+            </Container>
+        );
+    /*}
+    else{
+        return null;
+    }*/
 }

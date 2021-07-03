@@ -1,12 +1,13 @@
 import React, {useState, useLayoutEffect, useContext} from 'react';
 import {Container, ImageBtn, ButtonMenu, 
-        ButtonText, Text,ViewPlaceList, Scroll} from './styles';
+        ButtonText, Text,ViewPlaceList, Scroll, ButtonFilter} from './styles';
 import { useNavigation } from '@react-navigation/native';
 import {View, ActivityIndicator} from 'react-native';
 import {ListPlace } from '../PlaceList/styles';
 import firestore from '@react-native-firebase/firestore';
 import { AuthContext } from '../../contexts/auth';
 import PlacesListHome from '../../components/PlaceListHome';
+import Feather from 'react-native-vector-icons/Feather';
 
 
 export default function Home(){
@@ -92,6 +93,14 @@ export default function Home(){
                 )
         }
                 </ViewPlaceList>
+
+                <ButtonFilter onPress={()=>alert('filtro')}>
+                        <Feather
+                                name = "filter"
+                                color = "#FFF"
+                                size = {30}
+                        />
+                </ButtonFilter>
         </Container>
         );
 }
