@@ -3,6 +3,7 @@ import { Container, Header, Avatar, CompanyName, ContentView, AddressText, Actio
 import {useNavigation} from '@react-navigation/native';
 import haversine from 'haversine-distance';
 import Geolocation from '@react-native-community/geolocation';
+import { AuthContext } from '../../contexts/auth';
 
 export default function PlacesListHome({data}){
     const navigation = useNavigation();
@@ -26,7 +27,7 @@ export default function PlacesListHome({data}){
 
 
     function distance(){
-        
+
         Geolocation.getCurrentPosition(
             (position) => {
                     const lat = JSON.stringify(position.coords.latitude);
@@ -45,7 +46,7 @@ export default function PlacesListHome({data}){
         return dist;
     }
 
-    //if(distance() > 26.00){
+   // if(distance() > user.distance){
         return(
             <Container>
                 <Header>
@@ -81,8 +82,8 @@ export default function PlacesListHome({data}){
             
             </Container>
         );
-    /*}
-    else{
-        return null;
-    }*/
+  //  }
+  //  else{
+  //      return null;
+   // }
 }

@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import {View, ActivityIndicator} from 'react-native';
 import {ListPlace } from '../PlaceList/styles';
 import firestore from '@react-native-firebase/firestore';
-import { AuthContext } from '../../contexts/auth';
 import PlacesListHome from '../../components/PlaceListHome';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -15,7 +14,7 @@ export default function Home(){
         const navigation = useNavigation();
         const [places, setPlaces] = useState([]);
         const [loading, setLoading] = useState(true);
-        
+
         useLayoutEffect(() => {
         // flatList
         
@@ -87,7 +86,7 @@ export default function Home(){
                 (      
                 <ListPlace
                         showVerticalScrollIndicator = {false}
-                        data={places} 
+                        data={places} distance={distance} 
                         renderItem = {({item}) => <PlacesListHome data = {item}/>}
                 />
                 )
