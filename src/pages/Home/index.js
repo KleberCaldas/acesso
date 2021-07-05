@@ -86,7 +86,7 @@ export default function Home(){
                 (      
                 <ListPlace
                         showVerticalScrollIndicator = {false}
-                        data={places} distance={distance} 
+                        data={places}
                         renderItem = {({item}) => <PlacesListHome data = {item}/>}
                 />
                 )
