@@ -75,7 +75,9 @@ export default function PlacesListHome({data}){
     
                 <Actions>
                     <MoreInformationButtom onPress = {()=> navigation.navigate('AboutPlace', {name: data?.name, address: data?.address, phone: data?.phone, 
-                        category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade, latitude: data?.latitude, longitude:data?.longitude})}>
+                        category: data?.category, avatarUrl: data?.avatarUrl, grade: data?.grade, latitude: data?.latitude, longitude:data?.longitude, 
+                        ramp:data?.ramp, restroom:data?.restroom, door:data?.door, parking:data?.parking,
+                        internal_mobility:data?.internal_mobility, location:data?.location, information:data?.information})}>
                         <TextButtom>Mais informações</TextButtom>
                     </MoreInformationButtom>
                 </Actions>

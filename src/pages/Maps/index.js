@@ -30,6 +30,22 @@ export default class Maps extends Component {
         }
     }
 
+    find_item(array_items, item){
+        try{
+            const found = array_items.find(element => element == item);
+
+            if(found == undefined){
+                return "Não possui " + item;
+            }
+            else{
+                return "Possui " + item;
+            }
+        }
+        catch(e){
+            return "Erro";
+        }
+    }
+
     async componentDidMount(){
         await firestore().collection("RJ")
         .onSnapshot( snapshot =>{
@@ -98,9 +114,21 @@ export default class Maps extends Component {
                                         <View style={styles.containerCallout}>
                                             <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
                                             <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                            
+                                            <View style={styles.containerItems}>
+                                                <View>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
+                                                </View>
+                                            </View>
+                                            
                                             <View style={styles.arrowBorder}/>
                                             <View style={styles.arrow}/>
                                         </View>
+                                        
                                     </View>
                                 </Callout>
                             </Marker>
@@ -114,13 +142,22 @@ export default class Maps extends Component {
                                     description = {markers.address}
                                 >
                                     <Callout tootip>
-                                        <View>
-                                            <View style={styles.containerCallout}>
-                                                <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
-                                                <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
-                                                <View style={styles.arrowBorder}/>
-                                                <View style={styles.arrow}/>
+                                    <View style={styles.containerCallout}>
+                                            <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
+                                            <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                            
+                                            <View style={styles.containerItems}>
+                                                <View>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
+                                                </View>
                                             </View>
+                                            
+                                            <View style={styles.arrowBorder}/>
+                                            <View style={styles.arrow}/>
                                         </View>
                                     </Callout>
                                 </Marker>
@@ -135,13 +172,22 @@ export default class Maps extends Component {
                                     description = {markers.address}
                                 >
                                     <Callout tootip>
-                                        <View>
-                                            <View style={styles.containerCallout}>
-                                                <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
-                                                <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
-                                                <View style={styles.arrowBorder}/>
-                                                <View style={styles.arrow}/>
+                                    <View style={styles.containerCallout}>
+                                            <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
+                                            <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                            
+                                            <View style={styles.containerItems}>
+                                                <View>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
+                                                </View>
                                             </View>
+                                            
+                                            <View style={styles.arrowBorder}/>
+                                            <View style={styles.arrow}/>
                                         </View>
                                     </Callout>
                                 </Marker>
@@ -153,16 +199,26 @@ export default class Maps extends Component {
                                         image = {require('../../images/wheelchair_gray.png')}
                                         title = {markers.name}
                                         description = {markers.address}
+                                        
                                     >
                                         <Callout tootip>
-                                            <View>
-                                                <View style={styles.containerCallout}>
-                                                    <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
-                                                    <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
-                                                    <View style={styles.arrowBorder}/>
-                                                    <View style={styles.arrow}/>
+                                        <View style={styles.containerCallout}>
+                                            <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
+                                            <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
+                                            
+                                            <View style={styles.containerItems}>
+                                                <View>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
                                                 </View>
                                             </View>
+                                            
+                                            <View style={styles.arrowBorder}/>
+                                            <View style={styles.arrow}/>
+                                        </View>
                                         </Callout>
                                     </Marker>
                             );}    
@@ -186,7 +242,7 @@ export default class Maps extends Component {
         containerCallout:{
             flexDirection:'column',
             alignSelf: 'flex-start',
-            alignItems: 'center',
+            
             backgroundColor: '#fff',
             borderColor: '#ccc',
             padding: 15,
@@ -219,7 +275,7 @@ export default class Maps extends Component {
             fontSize: 20,
             fontWeight: 'bold',
             color: '#bdb76b',
-            
+            textAlign: 'center',
         },
 
         name:{
@@ -229,6 +285,14 @@ export default class Maps extends Component {
             padding: 10,
             textAlign: 'center',
             
+        },
+
+        containerItems:{
+            flexDirection: 'row',
+            padding: 10,
+            alignItems: 'center',
+            justifyContent: 'space-between'
+
         },
 
         image:{

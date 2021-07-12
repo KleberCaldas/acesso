@@ -17,9 +17,8 @@ export const ContainerInfo = styled.View`
 `;
 
 export const ContainerAccessbility = styled.View`
-    align-items: center;
     margin-top: 15px;
-    margin: 15px 3%;
+    margin: 15px 2%;
     background-color: #FFF;
     border-radius: 8px;
     box-shadow: 1px 1px 3px rgba(18, 18, 18, 0.2);
@@ -29,6 +28,11 @@ export const ContainerAccessbility = styled.View`
 export const ContainerButton = styled.View`
     flex-direction:row;
     flex: 1;
+    align-items: center;
+`;
+
+export const ViewDiscretion = styled.View`
+    flex-direction: row;
     align-items: center;
 `;
 
@@ -113,10 +117,24 @@ export const CategoryText = styled.Text`
 `;
 
 export const TextFinalGrade = styled.Text`
-    font-size: 25px;
+    font-size: 18px;
     color: #bdb76b;
     font-weight: bold;
-    left: 20px; 
+`;
+
+export const TextGradeItem = styled.Text`
+    font-size: 18px;
+    color: #121212;
+    text-align: left;
+    margin: 5px 20px;
+`;
+
+export const TextSubTitle = styled.Text`
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #121212;
+    textAlign: center;
 `;
 
 export const ImageAvatar = styled.Image`

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Container, OpenGoogleMapsButton, ButtonText, EvaluateButton, ContainerButton, ImageAvatar,
     Title, Address, ContainerInfo, ContainerAccessbility, Scroll, TextFinalGrade, PhoneButton,
-    PhoneText, CategoryText, AddressButton, AddressText} from './styles';
+    PhoneText, CategoryText, AddressButton, AddressText, TextGradeItem, TextSubTitle,
+    ViewDiscretion} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import { Text } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -23,6 +24,13 @@ export default function AboutPlace({route}){
     const navigation = useNavigation();
     const [latitudeUser, setLatitudeUser] = useState('');
     const [longitudeUser, setLongitudeUser] = useState('');
+    const [ramp] = useState(route.params.ramp);
+    const [restroom] = useState(route.params.restroom);
+    const [door] = useState(route.params.door);
+    const [parking] = useState(route.params.parking);
+    const [internal_mobility] = useState(route.params.internal_mobility);
+    const [location] = useState(route.params.location);
+    const [information] = useState(route.params.information);
 
     function final_grade(grade){
         try{
@@ -141,13 +149,19 @@ export default function AboutPlace({route}){
             </ContainerInfo>
             
             <ContainerAccessbility>
-            <Text>Acessibilidade</Text>
-            <Text>Nota Geral</Text>
-            <TextFinalGrade>{final_grade(grade)}</TextFinalGrade>
-            <Text>Mobilidade Interna</Text>
-            <Text>Mobiliário</Text>
-            <Text>Banheiro</Text>
-            <Text>Informação</Text>
+                <TextSubTitle>Acessibilidade</TextSubTitle>
+                <TextSubTitle>Mobilidade Reduzida</TextSubTitle>
+                <TextGradeItem>Nota Geral{'                                                 '}<TextFinalGrade>{final_grade(grade)}</TextFinalGrade></TextGradeItem>
+                <TextGradeItem>Rampas{'                                                     '}<TextFinalGrade>{final_grade(ramp)}</TextFinalGrade></TextGradeItem>
+                <TextGradeItem>Banheiro PCD{'                                                            '}<TextFinalGrade>{final_grade(restroom)}</TextFinalGrade></TextGradeItem>
+                <TextGradeItem>Porta PCD{'                                                 '}<TextFinalGrade>{final_grade(door)}</TextFinalGrade></TextGradeItem>
+                <TextGradeItem>Estacionamento{'                                      '}<TextFinalGrade>{final_grade(parking)}</TextFinalGrade></TextGradeItem>
+                <TextGradeItem>Mobilidade Interna{'                                  '}<TextFinalGrade>{final_grade(internal_mobility)}</TextFinalGrade></TextGradeItem>
+                <TextGradeItem>Localização{'                                              '}<TextFinalGrade>{final_grade(location)}</TextFinalGrade></TextGradeItem>
+                <TextGradeItem>Informação{'                                               '}<TextFinalGrade>{final_grade(information)}</TextFinalGrade></TextGradeItem>
+
+               
+
             </ContainerAccessbility>
             
             <ContainerButton>
