@@ -1,11 +1,11 @@
 import React, {Component, useState} from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity, Modal} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import firestore from '@react-native-firebase/firestore';
 import Feather from 'react-native-vector-icons/Feather';
-
-
+import call from 'react-native-phone-call';
+import {useNavigation} from '@react-navigation/native';
 
 export default class Maps extends Component {
     constructor(props){
@@ -13,6 +13,22 @@ export default class Maps extends Component {
         this.state = {
             region:null,
             markers:[],
+            isVisible: false,
+            markerName:null,
+            markerAddress: null,
+            markerPhone:null,
+            markerCategory: null,
+            markerAvatar: null,
+            markerGrade: null,
+            markerLatitude: null,
+            markerLongitude: null,
+            markerRamp: null,
+            markerRestroom: null,
+            markerDoor: null,
+            markerParking: null,
+            markerInternalMobility: null,
+            markerLocation: null,
+            markerInfo: null,
         };
     }
 
@@ -30,6 +46,10 @@ export default class Maps extends Component {
         }
     }
 
+    openModal(){
+        return true;
+    }
+
     find_item(array_items, item){
         try{
             const found = array_items.find(element => element == item);
@@ -44,6 +64,22 @@ export default class Maps extends Component {
         catch(e){
             return "Erro";
         }
+    }
+
+    call_phone(phone_number){
+        const args = {
+            number: phone_number,
+            prompt: false
+        }
+        call(args).catch(console.error);
+    }
+
+    callAboutPlace(){
+
+        navigation.navigate('AboutPlace', {name: this.state.markerName, address: this.state.markerAddress, phone: this.state.markerPhone, 
+            category: this.state.markerCategory, avatarUrl: this.state.markerAvatar, grade: this.state.markerGrade, latitude: this.state.markerLatitude, longitude: this.state.markerLongitude, 
+            ramp: this.state.markerRamp, restroom: this.state.markerRestroom, door: this.state.markerDoor, parking: this.state.markerParking,
+            internal_mobility: this.state.markerInternalMobility, location: this.state.markerLocation, information: this.state.markerInfo});
     }
 
     async componentDidMount(){
@@ -87,6 +123,7 @@ export default class Maps extends Component {
 
     render() {
         const {region, markers} = this.state;
+        const navigation = this.props;
             return (
             <View style={styles.container}>
 
@@ -109,7 +146,8 @@ export default class Maps extends Component {
                                 title = {markers.name}
                                 description = {markers.address}
                             >
-                                <Callout onPress={()=>alert('O que deseja fazer?')}>
+                                <Callout onPress={()=>{this.setState({isVisible:true, 
+                                                    markerName: markers.name, markerPhone: markers.phone})}}>
                                     <View>
                                         <View style={styles.containerCallout}>
                                             <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
@@ -117,11 +155,13 @@ export default class Maps extends Component {
                                             
                                             <View style={styles.containerItems}>
                                                 <View>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                </View>
+                                                <View>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
                                                 </View>
                                             </View>
                                             
@@ -141,25 +181,30 @@ export default class Maps extends Component {
                                     title = {markers.name}
                                     description = {markers.address}
                                 >
-                                    <Callout tootip>
-                                    <View style={styles.containerCallout}>
+                                    <Callout onPress={()=>alert('O que deseja fazer?')}>
+                                    <View>
+                                        <View style={styles.containerCallout}>
                                             <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
                                             <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
                                             
                                             <View style={styles.containerItems}>
                                                 <View>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                </View>
+                                                <View>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
                                                 </View>
                                             </View>
                                             
                                             <View style={styles.arrowBorder}/>
                                             <View style={styles.arrow}/>
                                         </View>
-                                    </Callout>
+                                        
+                                    </View>
+                                </Callout>
                                 </Marker>
                         );}
 
@@ -171,25 +216,30 @@ export default class Maps extends Component {
                                     title = {markers.name}
                                     description = {markers.address}
                                 >
-                                    <Callout tootip>
-                                    <View style={styles.containerCallout}>
+                                    <Callout onPress={()=>alert('O que deseja fazer?')}>
+                                    <View>
+                                        <View style={styles.containerCallout}>
                                             <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
                                             <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
                                             
                                             <View style={styles.containerItems}>
                                                 <View>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                </View>
+                                                <View>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
                                                 </View>
                                             </View>
                                             
                                             <View style={styles.arrowBorder}/>
                                             <View style={styles.arrow}/>
                                         </View>
-                                    </Callout>
+                                        
+                                    </View>
+                                </Callout>
                                 </Marker>
                             );}
                         else{
@@ -201,32 +251,74 @@ export default class Maps extends Component {
                                         description = {markers.address}
                                         
                                     >
-                                        <Callout tootip>
+                                        <Callout onPress={()=>alert('O que deseja fazer?')}>
+                                    <View>
                                         <View style={styles.containerCallout}>
                                             <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
                                             <Text style={styles.grade}>{this.final_grade(markers.grade)}</Text>
                                             
                                             <View style={styles.containerItems}>
                                                 <View>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
-                                                    <Text>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "rampa")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "banheiro PCD")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "estacionamento")}</Text>
+                                                </View>
+                                                <View>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "mobilidade interna")}</Text>
+                                                    <Text style={styles.textItems}>{this.find_item(markers.itemsReducedMobility, "elevador")}</Text>
                                                 </View>
                                             </View>
                                             
                                             <View style={styles.arrowBorder}/>
                                             <View style={styles.arrow}/>
                                         </View>
-                                        </Callout>
+                                        
+                                    </View>
+                                </Callout>
                                     </Marker>
-                            );}    
-                        
+                            );}              
                     })
                 }
+
+            
             </MapView>
 
+            <View>
+                
+                <Modal navigate={navigation} visible = {this.state.isVisible} animationType="slide" transparent = {false}>
+                    <View style={styles.modalContainer}>
+                    <Text style={styles.titleModal}>O que deseja fazer ?</Text>
+                    <Text style={styles.namePlaceModal}>{this.state.markerName}</Text>
+                    <TouchableOpacity style={styles.buttonMenu} onPress = {() => this.call_phone(this.state.markerPhone)}>
+                    <Text style={styles.phoneText}>{this.state.markerPhone}</Text>
+                        <Feather
+                            name = "phone-call"
+                            color = "#FFF"
+                            size = {20}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonMenu} onPress = {()=> navigation.navigate('AboutPlace', {name: this.state.markerName, address: this.state.markerAddress, phone: this.state.markerPhone, 
+            category: this.state.markerCategory, avatarUrl: this.state.markerAvatar, grade: this.state.markerGrade, latitude: this.state.markerLatitude, longitude: this.state.markerLongitude, 
+            ramp: this.state.markerRamp, restroom: this.state.markerRestroom, door: this.state.markerDoor, parking: this.state.markerParking,
+            internal_mobility: this.state.markerInternalMobility, location: this.state.markerLocation, information: this.state.markerInfo})}>
+                    <Text style={styles.phoneText}>Mais informações</Text>
+                        <Feather
+                            name = "info"
+                            color = "#FFF"
+                            size = {20}
+                        />
+                    </TouchableOpacity>
+                    <Text>Mais informações</Text>
+                        <TouchableOpacity style={styles.buttonBack} onPress = { ()=>{this.setState({isVisible:false})} }>
+                            <Feather
+                                name="arrow-left"
+                                size={25}
+                                color ="#bdb76b"
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+            </View>
             </View>
             );
         }
@@ -246,7 +338,7 @@ export default class Maps extends Component {
             backgroundColor: '#fff',
             borderColor: '#ccc',
             padding: 15,
-            width: 250,
+            width: 320,
         },
 
         containerTitleImage:{
@@ -287,18 +379,77 @@ export default class Maps extends Component {
             
         },
 
+        namePlaceModal:{
+            fontSize: 15,
+            fontWeight:'bold',
+            marginBottom: 5,
+            padding: 10,
+            textAlign: 'center',
+            marginTop:20,
+        },
+
+        titleModal:{
+            marginTop: 20,
+            marginLeft: 20,
+            marginRight: 20,
+            fontSize: 25,
+            color: 'black',
+            fontWeight: 'bold',
+        },
+
         containerItems:{
             flexDirection: 'row',
-            padding: 10,
-            alignItems: 'center',
-            justifyContent: 'space-between'
+            marginLeft: 5,
+            marginRight: 5,
+            marginTop: 10,
+            justifyContent: 'space-between',
+        },
 
+        textItems:{
+            fontSize: 12
         },
 
         image:{
             width: "100%",
             height: 80,
             borderRadius: 10,
+        },
+
+        modalContainer:{
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
+        backgroundColor: "#FFF",
+        position: 'absolute',
+        alignItems: 'center',
+        
+        bottom: 0,
+        },
+
+        buttonBack:{
+            
+            position: 'absolute',
+            top: 20,
+            left: 25,
+            flexDirection: 'row',
+            alignItems: 'center',
+        },
+
+        buttonMenu:{
+            marginTop: 20,
+            alignItems: 'center',
+            flexDirection: 'row',
+            backgroundColor: '#007a87',
+            width: '80%',
+            height:'10%',
+            borderRadius: 8,
+        },
+
+        phoneText:{
+            marginRight: '10%',
+            marginLeft: '30%',
+            fontSize: 15,
+            color: '#FFF',
         },
 
         maps:{

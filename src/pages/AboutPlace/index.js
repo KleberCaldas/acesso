@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { Container, OpenGoogleMapsButton, ButtonText, EvaluateButton, ContainerButton, ImageAvatar,
-    Title, Address, ContainerInfo, ContainerAccessbility, Scroll, TextFinalGrade, PhoneButton,
+import { Container, ButtonText, EvaluateButton, ContainerButton, ImageAvatar,
+    Title, ContainerInfo, ContainerAccessbility, Scroll, TextFinalGrade, PhoneButton,
     PhoneText, CategoryText, AddressButton, AddressText, TextGradeItem, TextSubTitle,
-    ViewDiscretion} from './styles';
+    ReportButton} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import { Text } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -145,6 +145,17 @@ export default function AboutPlace({route}){
             </PhoneButton>
             
             <CategoryText>{cat_name(category)}</CategoryText>
+
+            <ContainerButton>
+
+                <EvaluateButton onPress = { ()=> navigation.navigate('EvaluatePlace',  {docId: docId})}>
+                    <ButtonText>Avaliar</ButtonText>
+                </EvaluateButton>
+
+                <ReportButton onPress = {()=>alert('Implementar botão')}>
+                    <ButtonText>Denunciar</ButtonText>
+                </ReportButton>
+            </ContainerButton>
             
             </ContainerInfo>
             
@@ -164,12 +175,7 @@ export default function AboutPlace({route}){
 
             </ContainerAccessbility>
             
-            <ContainerButton>
-
-                <EvaluateButton onPress = { ()=> navigation.navigate('EvaluatePlace',  {docId: docId})}>
-                    <ButtonText>Avaliar</ButtonText>
-                </EvaluateButton>
-            </ContainerButton>
+            
             </Scroll>
         </Container>
     );

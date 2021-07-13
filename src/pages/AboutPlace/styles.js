@@ -27,8 +27,8 @@ export const ContainerAccessbility = styled.View`
 
 export const ContainerButton = styled.View`
     flex-direction:row;
-    flex: 1;
-    align-items: center;
+    justify-content: space-between;
+    
 `;
 
 export const ViewDiscretion = styled.View`
@@ -62,14 +62,23 @@ export const ButtonText = styled.Text`
 
 
 export const EvaluateButton = styled.TouchableOpacity`
-    margin-top: 20px;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: #6495ed;
+    width: 50%;
+    height: 50px;
+    border-radius: 8px;
+`;
+
+export const ReportButton = styled.TouchableOpacity`
+    margin-top: 10px;
     align-items: center;
     justify-content: center;
     background-color: #e52246;
-    width: 110px;
-    height: 80px;
+    width: 50%;
+    height: 50px;
     border-radius: 8px;
-    left: 15px;
 `;
 
 
@@ -78,8 +87,8 @@ export const PhoneButton = styled.TouchableOpacity`
     align-items: center;
     flex-direction: row;
     background-color: #FFF;
-    width: 390px;
-    height:50px;
+    width: 100%;
+    height:40px;
 
 `;
 
@@ -88,8 +97,8 @@ export const AddressButton = styled.TouchableOpacity`
     align-items: center;
     flex-direction: row;
     background-color: #FFF;
-    width: 320px;
-    height: 100px;
+    width: 100%;
+    height: 80px;
 `;
 
 export const Title = styled.Text`
@@ -101,13 +110,14 @@ export const Title = styled.Text`
 `;
 
 export const PhoneText = styled.Text`
-    margin-right: 80px;
-    margin-left: 80px;
+    margin-right: 10%;
+    margin-left: 30%;
     font-size: 15px;
 `;
 
 export const AddressText = styled.Text`
-    margin-right: 10px;
+    margin-right: 10%;
+    margin-left: 10%;
     font-size: 15px;
 `;
 
