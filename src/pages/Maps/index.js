@@ -285,30 +285,37 @@ export default class Maps extends Component {
 
             <View>
                 
-                <Modal navigate={navigation} visible = {this.state.isVisible} animationType="slide" transparent = {false}>
+                <Modal navigate={navigation} visible = {this.state.isVisible} animationType="slide" transparent = {true}>
                     <View style={styles.modalContainer}>
                     <Text style={styles.titleModal}>O que deseja fazer ?</Text>
-                    <Text style={styles.namePlaceModal}>{this.state.markerName}</Text>
                     <TouchableOpacity style={styles.buttonMenu} onPress = {() => this.call_phone(this.state.markerPhone)}>
-                    <Text style={styles.phoneText}>{this.state.markerPhone}</Text>
-                        <Feather
-                            name = "phone-call"
-                            color = "#FFF"
-                            size = {20}
-                        />
+                        <Text style={styles.phoneText}>Telefonar</Text>
+                            <Feather
+                                name = "phone-call"
+                                color = "#FFF"
+                                size = {20}
+                            />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonMenu} onPress = {()=> navigation.navigate('AboutPlace', {name: this.state.markerName, address: this.state.markerAddress, phone: this.state.markerPhone, 
             category: this.state.markerCategory, avatarUrl: this.state.markerAvatar, grade: this.state.markerGrade, latitude: this.state.markerLatitude, longitude: this.state.markerLongitude, 
             ramp: this.state.markerRamp, restroom: this.state.markerRestroom, door: this.state.markerDoor, parking: this.state.markerParking,
             internal_mobility: this.state.markerInternalMobility, location: this.state.markerLocation, information: this.state.markerInfo})}>
-                    <Text style={styles.phoneText}>Mais informações</Text>
-                        <Feather
-                            name = "info"
-                            color = "#FFF"
-                            size = {20}
-                        />
+                        <Text style={styles.phoneText}>Mais informações</Text>
+                            <Feather
+                                name = "info"
+                                color = "#FFF"
+                                size = {20}
+                            />
                     </TouchableOpacity>
-                    <Text>Mais informações</Text>
+                    <TouchableOpacity style={styles.buttonMenu} onPress = {()=>alert('implementar ir ao local')}>
+                        <Text style={styles.phoneText}>Ir ao local</Text>
+                            <Feather
+                                name = "map-pin"
+                                color = "#FFF"
+                                size = {20}
+                            />
+                    </TouchableOpacity>
+                        
                         <TouchableOpacity style={styles.buttonBack} onPress = { ()=>{this.setState({isVisible:false})} }>
                             <Feather
                                 name="arrow-left"
