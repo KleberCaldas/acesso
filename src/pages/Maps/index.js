@@ -6,6 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import Feather from 'react-native-vector-icons/Feather';
 import call from 'react-native-phone-call';
 import {useNavigation} from '@react-navigation/native';
+import { showLocation } from 'react-native-map-link';
 
 export default class Maps extends Component {
     constructor(props){
@@ -20,8 +21,8 @@ export default class Maps extends Component {
             markerCategory: null,
             markerAvatar: null,
             markerGrade: null,
-            markerLatitude: null,
-            markerLongitude: null,
+            userLatitude: null,
+            userLongitude: null,
             markerRamp: null,
             markerRestroom: null,
             markerDoor: null,
@@ -80,6 +81,41 @@ export default class Maps extends Component {
             category: this.state.markerCategory, avatarUrl: this.state.markerAvatar, grade: this.state.markerGrade, latitude: this.state.markerLatitude, longitude: this.state.markerLongitude, 
             ramp: this.state.markerRamp, restroom: this.state.markerRestroom, door: this.state.markerDoor, parking: this.state.markerParking,
             internal_mobility: this.state.markerInternalMobility, location: this.state.markerLocation, information: this.state.markerInfo});
+    }
+
+    openMaps(latitudeUser, longitudeUser, latitude, longitude, name){
+
+        this.getLocation();
+
+        showLocation({
+            latitude: latitude, //latitude from place
+            longitude: longitude, // longitude from place
+            sourceLatitude: latitudeUser,  // optionally specify starting location for directions
+            sourceLongitude: longitudeUser,  // not optional if sourceLatitude is specified
+            title: name,  // optional
+            googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
+            //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
+            alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+            dialogTitle: 'This is the dialog Title', // optional (default: 'Open in Maps')
+            dialogMessage: 'This is the amazing dialog Message', // optional (default: 'What app would you like to use?')
+            cancelText: 'This is the cancel button text', // optional (default: 'Cancel')
+            appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
+            naverCallerName: 'com.example.myapp' // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
+            // appTitles: { 'google-maps': 'My custom Google Maps title' } // optionally you can override default app titles
+            // app: 'uber'  // optionally specify specific app to use
+        })
+    }
+
+    getLocation(){
+        Geolocation.getCurrentPosition(
+        (position) => {
+            const lat = JSON.stringify(position.coords.latitude);
+            const long = JSON.stringify(position.coords.longitude);
+            this.setState({userLatitude: lat, userLongitude: long}); 
+        },
+            (error) => alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
     }
 
     async componentDidMount(){
@@ -147,7 +183,8 @@ export default class Maps extends Component {
                                 description = {markers.address}
                             >
                                 <Callout onPress={()=>{this.setState({isVisible:true, 
-                                                    markerName: markers.name, markerPhone: markers.phone})}}>
+                                                    markerName: markers.name, markerPhone: markers.phone, markerLatitude: markers.latitude,
+                                                    markerLongitude: markers.longitude})}}>
                                     <View>
                                         <View style={styles.containerCallout}>
                                             <Text numberOfLines={2} style={styles.name}>{markers.name}</Text>
@@ -307,7 +344,8 @@ export default class Maps extends Component {
                                 size = {20}
                             />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonMenu} onPress = {()=>alert('implementar ir ao local')}>
+                    <TouchableOpacity style={styles.buttonMenu} onPress = {()=> this.openMaps(this.state.userLatitude,this.state.userLongitude, this.state.markerlatitude, this.state.markerlatitude,
+                        this.state.markerName)}>
                         <Text style={styles.phoneText}>Ir ao local</Text>
                             <Feather
                                 name = "map-pin"
